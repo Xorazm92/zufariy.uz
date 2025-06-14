@@ -1,35 +1,76 @@
-import React, { Component } from "react";
-import Typist from "react-typist";
-import Links from "../components/links";
+import React from 'react';
+import { Link } from 'react-scroll';
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown } from 'react-icons/fa';
+import Typist from 'react-typist';
+import './styles.css';
 
-import "./styles.css";
-
-class Intro extends Component {
-  render() {
-    return (
-      <div className="intro">
-        <div className="introText">
-          <Typist avgTypingDelay={10} cursor={{ hideWhenDone: true }}>
-            <p className="intro-p">
-              Hi there, my name is{" "}
-              <span className="highlight">Alexander Xu Chen</span>.
-            </p>
-            <Typist.Delay ms={1000} />
-            <br />
-            <p className="intro-p">
-              I'm a <span className="highlight">Software Developer</span>{" "}
-              studying <span className="highlight">Computer Science</span> @{" "}
-              <span className="highlight">University of Toronto</span>.
-            </p>
-            <Typist.Delay ms={1000} />
-            <br />
-            <p className="intro-p">Welcome to my website!</p>
+const Intro = ({ id }) => {
+  return (
+    <section id={id} className="intro-section">
+      <div className="container">
+        <div className="intro-content">
+          <Typist 
+            avgTypingDelay={10} 
+            cursor={{ hideWhenDone: true, show: false }}
+            className="intro-typist"
+          >
+            <h1 className="intro-title">
+              Hi, I'm <span className="highlight">Your Name</span>
+            </h1>
+            <Typist.Delay ms={500} />
+            <h2 className="intro-subtitle">
+              Full Stack Developer
+            </h2>
           </Typist>
+          
+          <p className="intro-description">
+            I build exceptional digital experiences with modern technologies.
+            Passionate about creating elegant solutions to complex problems.
+          </p>
+          
+          <div className="cta-buttons">
+            <Link 
+              to="projects" 
+              smooth={true} 
+              duration={500} 
+              className="btn btn-primary"
+            >
+              View My Work
+            </Link>
+            <a 
+              href="#" 
+              className="btn btn-outline"
+              onClick={(e) => {
+                e.preventDefault();
+                window.open('/resume.pdf', '_blank');
+              }}
+            >
+              Download CV
+            </a>
+          </div>
+          
+          <div className="social-links">
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <FaGithub className="social-icon" />
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedin className="social-icon" />
+            </a>
+            <a href="mailto:your.email@example.com" aria-label="Email">
+              <FaEnvelope className="social-icon" />
+            </a>
+          </div>
+          
+          <div className="scroll-down">
+            <Link to="projects" smooth={true} duration={500}>
+              <span>Scroll Down</span>
+              <FaArrowDown className="bounce" />
+            </Link>
+          </div>
         </div>
-        <Links />
       </div>
-    );
-  }
-}
+    </section>
+  );
+};
 
 export default Intro;

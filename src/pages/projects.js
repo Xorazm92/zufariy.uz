@@ -1,388 +1,197 @@
-import React, { Component } from "react";
+import React, { useState } from 'react';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import './styles.css';
 
-import "./styles.css";
+// Project data
+const projects = [
+  {
+    id: 1,
+    title: 'VSCode XML',
+    description: 'Provides comprehensive XML language support for Visual Studio Code with validation, formatting, and IntelliSense features.',
+    tags: ['VS Code', 'TypeScript', 'XML'],
+    image: '/images/projects/vscodexml.png',
+    github: 'https://github.com/redhat-developer/vscode-xml',
+    demo: 'https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml',
+    featured: true
+  },
+  {
+    id: 2,
+    title: 'Achievement Hub',
+    description: 'A platform for tracking and showcasing personal achievements and skills with gamification elements.',
+    tags: ['React', 'Node.js', 'MongoDB'],
+    image: '/images/projects/achievementhub.png',
+    github: '#',
+    demo: '#',
+    featured: true
+  },
+  {
+    id: 3,
+    title: 'Arctic Miners',
+    description: 'A blockchain-based mining simulation game with real-time strategy elements.',
+    tags: ['Blockchain', 'Web3', 'React'],
+    image: '/images/projects/arcticminers.jpg',
+    github: '#',
+    demo: '#',
+    featured: true
+  },
+  {
+    id: 4,
+    title: 'Bell Smart City',
+    description: 'IoT platform for smart city management and monitoring.',
+    tags: ['IoT', 'React', 'Python', 'Django'],
+    image: '/images/projects/bellsmartcity.png',
+    github: '#',
+    demo: '#',
+    featured: false
+  },
+  {
+    id: 5,
+    title: 'Pixel Pencil',
+    description: 'A lightweight JavaScript library for creating pixel art in the browser.',
+    tags: ['JavaScript', 'HTML5 Canvas'],
+    image: '/images/projects/pixelpenciljs.jpg',
+    github: '#',
+    demo: '#',
+    featured: false
+  },
+  {
+    id: 6,
+    title: 'SafeBet',
+    description: 'A decentralized betting platform with smart contracts.',
+    tags: ['Ethereum', 'Solidity', 'React'],
+    image: '/images/projects/safebet.jpg',
+    github: '#',
+    demo: '#',
+    featured: true
+  },
+  {
+    id: 7,
+    title: 'VSCode Quarkus',
+    description: 'Provides support for application development using Quarkus Tools.',
+    tags: ['VS Code', 'TypeScript', 'Quarkus'],
+    image: '/images/projects/vscodequarkus.png',
+    github: 'https://github.com/redhat-developer/vscode-quarkus',
+    demo: 'https://marketplace.visualstudio.com/items?itemName=redhat.vscode-quarkus',
+    featured: true
+  },
+  {
+    id: 8,
+    title: 'VSCode MicroProfile',
+    description: 'Provides support for the development of MicroProfile-based applications.',
+    tags: ['VS Code', 'TypeScript', 'MicroProfile'],
+    image: '/images/projects/vscodemicroprofile.png',
+    github: 'https://github.com/redhat-developer/vscode-microprofile',
+    demo: 'https://marketplace.visualstudio.com/items?itemName=redhat.vscode-microprofile',
+    featured: true
+  },
+  {
+    id: 9,
+    title: 'VSCode Java',
+    description: 'Provides Java language support via Eclipse JDT Language Server',
+    tags: ['VS Code', 'TypeScript', 'Java'],
+    image: '/images/projects/vscodejava.png',
+    github: 'https://github.com/redhat-developer/vscode-java',
+    demo: 'https://marketplace.visualstudio.com/items?itemName=redhat.java',
+    featured: true
+  },
+  {
+    id: 10,
+    title: 'Robo-Dropper',
+    description: 'A custom built Arduino board programmed with C++ to automate an application relevant to education.',
+    tags: ['Arduino', 'C++', 'Hardware'],
+    image: '/images/projects/robodropper.jpg',
+    github: '#',
+    demo: 'https://www.artsci.utoronto.ca/news/hackathon-science-education-hacking-better-world',
+    featured: false
+  },
+  {
+    id: 11,
+    title: 'Twilio CPaaS Solutions',
+    description: 'Prototyped SMS Chatbot and Survey using Twilio provided phone number for direct user communication.',
+    tags: ['Twilio', 'Node.js', 'SMS'],
+    image: '/images/projects/twiliochatbot.png',
+    github: '#',
+    demo: 'https://www.twilio.com/bots',
+    featured: false
+  },
+  {
+    id: 12,
+    title: 'Desperado',
+    description: 'An Android game made with Java and XML featuring a SQL backend for user tracking and data.',
+    tags: ['Android', 'Java', 'SQL'],
+    image: '/images/projects/desperado.png',
+    github: 'https://github.com/faarisali/desperado-android',
+    demo: '#',
+    featured: false
+  }
+];
 
-import AchievementHub from "../res/projects/achievementhub.png";
-import ArcticMiners from "../res/projects/arcticminers.jpg";
-import BellSmartCity from "../res/projects/bellsmartcity.png";
-import Desperado from "../res/projects/desperado.png";
-import PixelPencil from "../res/projects/pixelpenciljs.jpg";
-import RoboDropper from "../res/projects/robodropper.jpg";
-import SafeBet from "../res/projects/safebet.jpg";
-import TwilioChatBot from "../res/projects/twiliochatbot.png";
-import VSCodeJava from "../res/projects/vscodejava.png";
-import VSCodeMicroProfile from "../res/projects/vscodemicroprofile.png";
-import VSCodeQuarkus from "../res/projects/vscodequarkus.png";
-import VSCodeXML from "../res/projects/vscodexml.png";
+const Projects = ({ id }) => {
+  const [showAll, setShowAll] = useState(false);
+  
+  const displayedProjects = showAll ? projects : projects.filter(project => project.featured);
 
-class Projects extends Component {
-  render() {
-    return (
-      <div className="projects">
-        {/* <h2 className="projects-title">My Projects </h2> */}
-        <br />
-        <br />
-        <div class="projectCards container-fluid">
-          <div class="row flex-row flex-nowrap">
-            <div class="card-columns">
-              <div class="card">
-                <img class="card-img-top" src={VSCodeXML} alt="VSCodeXML" />
-                <div class="card-body">
-                  <h5 class="card-title">VSCode XML</h5>
-                  <h7 className="title-tag">XML Language Support</h7>
-                  <p class="card-text">
-                    Provides support for creating and editing XML documents.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Try it out
-                  </a>
-                  <a
-                    href="https://github.com/redhat-developer/vscode-xml"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
+  return (
+    <section id={id} className="projects-section">
+      <div className="container">
+        <h2 className="section-title">My Projects</h2>
+        <div className="projects-grid">
+          {displayedProjects.map((project) => (
+            <div key={project.id} className="project-card">
+              <div className="project-image">
+                <img src={project.image} alt={project.title} className="project-img" />
+                <div className="project-overlay">
+                  <div className="project-links">
+                    {project.demo !== '#' && (
+                      <a 
+                        href={project.demo} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="project-link"
+                        aria-label={`View ${project.title} demo`}
+                      >
+                        <FaExternalLinkAlt />
+                      </a>
+                    )}
+                    {project.github !== '#' && (
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="project-link"
+                        aria-label="View on GitHub"
+                      >
+                        <FaGithub />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-
-              <div class="card">
-                <img
-                  class="card-img-top"
-                  src={VSCodeQuarkus}
-                  alt="BellSmartCity"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">VSCode Quarkus</h5>
-                  <h7 className="title-tag">Quarkus Language Support</h7>
-                  <p class="card-text">
-                    Provides support for application development using Quarkus
-                    Tools.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-quarkus"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Try it out
-                  </a>
-                  <a
-                    href="https://quarkus.io/blog/vscode-quarkus-1.10.0-qute/"
-                    class="btn btn-outline-dark btn-lg m-1"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Read more
-                  </a>
-                  <a
-                    href="https://github.com/redhat-developer/vscode-quarkus"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="card">
-                <img
-                  class="card-img-top"
-                  src={VSCodeMicroProfile}
-                  alt="BellSmartCity"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">VSCode MicroProfile</h5>
-                  <h7 className="title-tag">
-                    Language Support for Eclipse MicroProfile
-                  </h7>
-                  <p class="card-text">
-                    Provides support for the development of MicroProfile-based
-                    applications.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-microprofile"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Try it out
-                  </a>
-                  <a
-                    href="https://github.com/redhat-developer/vscode-microprofile"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="card">
-                <img class="card-img-top" src={VSCodeJava} alt="VSCodeJava" />
-                <div class="card-body">
-                  <h5 class="card-title">VSCode Java</h5>
-                  <h7 className="title-tag">Java Language Support</h7>
-                  <p class="card-text">
-                    Provides Java language support via Eclipse JDT Language
-                    Server
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://marketplace.visualstudio.com/items?itemName=redhat.java"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Try it out
-                  </a>
-                  <a
-                    href="https://github.com/redhat-developer/vscode-java"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="card">
-                <img
-                  class="card-img-top"
-                  src={BellSmartCity}
-                  alt="BellSmartCity"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Bell Smart City</h5>
-                  <h7 className="title-tag">Markham Smart City Pilot</h7>
-                  <p class="card-text">
-                    A city wide solution that integrates IoT to optimize city
-                    operations.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://business.bell.ca/shop/medium-large/internet-of-things/smart-cities"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Check it out
-                  </a>
-                </div>
-              </div>
-
-              <div class="card">
-                <img
-                  class="card-img-top"
-                  src={ArcticMiners}
-                  alt="ArcticMiners"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Arctic Miners</h5>
-                  <h7 className="title-tag">
-                    UoftHacks VII Winner/Best Blockchain Build
-                  </h7>
-                  <p class="card-text">
-                    An Angular visualizer to simplify and display Ethereum
-                    ERC721 Tokens using Smart Contracts and Web3.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://devpost.com/software/blockchaingame"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Check it out
-                  </a>
-                  <a
-                    href="https://github.com/flodesi/Arctic-Miner"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="card">
-                <img
-                  class="card-img-top"
-                  src={AchievementHub}
-                  alt="AchievementHub"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">AchievementHub</h5>
-                  <p class="card-text">
-                    A web-based application for users to share game achievements
-                    from multiple gaming platforms.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://quiet-meadow-93883.herokuapp.com/"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Check it out
-                  </a>
-                  <a
-                    href="https://github.com/csc309-fall-2020/team30"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="card p-3">
-                <img class="card-img-top" src={Desperado} alt="Desperado" />
-                <div class="card-body">
-                  <h5 class="card-title">Desperado</h5>
-                  <h7 className="title-tag">Android Mobile Game</h7>
-                  <p class="card-text">
-                    A game made in Java and XML with a SQL backend for user
-                    tracking and data. Implements fundamental design patterns
-                    and model view presenter architecture.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://github.com/faarisali/desperado-android"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="card p-3">
-                <img
-                  class="card-img-top"
-                  src={PixelPencil}
-                  alt="PixelPenciljs"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">PixelPencil.js</h5>
-                  <p class="card-text">
-                    Open-source JS library to add a pixel painting canvas to
-                    webpages.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://pixelpenciljs.herokuapp.com/"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Check it out
-                  </a>
-                  <a
-                    href="https://github.com/csc309-fall-2020/js-library-chenal14"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="card p-3">
-                <img class="card-img-top" src={SafeBet} alt="SafeBet" />
-                <div class="card-body">
-                  <h5 class="card-title">SafeBet</h5>
-                  <h7 className="title-tag">Hack the 6ix 2019</h7>
-                  <p class="card-text">
-                    A vanilla HTML, JS web app hosted with a Node.js instance
-                    designed to monitor driving habits based on an algorithm
-                    trained with Amazon SageMaker to report realtime data.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://devpost.com/rayadunia2021?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Check it out
-                  </a>
-                  <a
-                    href="https://github.com/Xorazm92/safe_bet"
-                    class="btn btn-lg"
-                  >
-                    <i class="fab fa-github fa-2x"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="card">
-                <img class="card-img-top" src={RoboDropper} alt="RoboDropper" />
-                <div class="card-body">
-                  <h5 class="card-title">Robo-Dropper</h5>
-                  <h7 className="title-tag">
-                    Pueblo Science Hackathon for Science Education Winner
-                  </h7>
-                  <p class="card-text">
-                    A custom built Arduino board programmed with C++ to automate
-                    an application relevant and beneficial to 3rd world
-                    education.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://www.artsci.utoronto.ca/news/hackathon-science-education-hacking-better-world?fbclid=IwAR0T7zmL5y94kUCAwGm61Thg08iLqUJiyj7BvgP7fm5xFYEy1xx_UfL-Mxo"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Check it out
-                  </a>
-                </div>
-              </div>
-
-              <div class="card">
-                <img
-                  class="card-img-top"
-                  src={TwilioChatBot}
-                  alt="TwilioChatBot"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Twilio CPaaS Solutions</h5>
-                  <h7 className="title-tag">Twilio Online Developer Program</h7>
-                  <p class="card-text">
-                    Prototyped SMS Chatbot and Survey using Twilio provided
-                    phone number for direct user communication, powered by
-                    regular expressions.
-                  </p>
-                </div>
-                <div className="button-container">
-                  <a
-                    href="https://www.twilio.com/bots"
-                    class="btn btn-outline-dark btn-lg"
-                    role="button"
-                    aria-pressed="true"
-                  >
-                    Check it out
-                  </a>
+              <div className="project-content">
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-description">{project.description}</p>
+                <div className="project-tags">
+                  {project.tags.map((tag, index) => (
+                    <span key={index} className="project-tag">{tag}</span>
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
+        {!showAll && projects.length > 6 && (
+          <div className="text-center mt-4">
+            <button 
+              className="btn btn-outline-primary"
+              onClick={() => setShowAll(true)}
+            >
+              View All Projects
+            </button>
+          </div>
+        )}
       </div>
-    );
-  }
-}
+    </section>
+  );
+};
 
 export default Projects;
