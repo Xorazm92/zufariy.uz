@@ -1,0 +1,24 @@
+.projects-section {
+  background-color: var(--background-color);
+  padding: 5rem 0;
+}
+
+.projects-section h2 {
+  color: var(--text-color);
+}
+
+.project-card {
+  background-color: var(--card-bg-color) !important;
+  border: 1px solid var(--card-border-color) !important;
+  color: var(--text-color) !important;
+  transition: transform 0.2s ease-in-out;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card .card-title,
+.project-card .card-text {
+  color: var(--text-color) !important;
+}

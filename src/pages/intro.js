@@ -1,11 +1,12 @@
-import React from "react";
-import { TypeAnimation } from "react-type-animation";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Links from "../components/links";
-
-import "./styles.css";
+import { TypeAnimation } from 'react-type-animation';
+import "./intro.css";
 
 // Komponent funksional ko'rinishga o'tkazildi va props qabul qiladi
 const Intro = ({ id }) => {
+  const { t } = useTranslation();
   return (
     // react-scroll ishlashi uchun id atributi qo'shildi
     <div id={id} className="intro">
@@ -16,12 +17,14 @@ const Intro = ({ id }) => {
           ketma-ket, bir-birining o'rniga yozib ko'rsatadi.
         */}
         <TypeAnimation
+          // sequence propiga kalit qo'shish animatsiyani til o'zgarganda qayta ishga tushiradi
+          key={t('intro.greeting')}
           sequence={[
-            "Salom, mening ismim Zufarbek Bobojonov Karimberganovich.",
+            t('intro.greeting'),
             1500,
-            "Men Full Stack (NodeJS+ReactJS) dasturchiman.",
+            t('intro.role'),
             1500,
-            "Mening veb-saytimga xush kelibsiz!",
+            t('intro.welcome'),
             2000,
           ]}
           wrapper="p"

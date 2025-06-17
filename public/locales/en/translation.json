@@ -1,0 +1,33 @@
+{
+  "navbar": {
+    "intro": "Home",
+    "projects": "Projects",
+    "work": "Experience",
+    "stack": "Stack"
+  },
+  "intro": {
+    "greeting": "Hello, my name is Zufarbek Bobojonov Karimberganovich.",
+    "role": "I am a Full Stack (NodeJS+ReactJS) developer.",
+    "welcome": "Welcome to my website!"
+  },
+  "projects": {
+    "title": "My Projects",
+    "list": [
+      { "id": "datagaze", "alt": "DataGaze Project", "title": "DataGaze", "tag": "Data Visualization", "description": "A platform for analyzing data and visualizing it through interactive charts.", "buttonText": "View" },
+      { "id": "crm", "alt": "CRM Project", "title": "CRM", "tag": "Customer Relationship Management", "description": "A CRM system for storing customer information, managing relationships, and automating sales processes.", "buttonText": "View" },
+      { "id": "nasiya", "alt": "Nasiya Savdo Project", "title": "Nasiya Savdo", "tag": "Automated Trading System", "description": "A web application to automate installment sales operations, track debts, and generate reports.", "buttonText": "View" },
+      { "id": "quiz_app", "alt": "Quiz App Project", "title": "Quiz App", "tag": "Online Quiz", "description": "A platform with tests and quizzes on various topics for users to test their knowledge.", "buttonText": "View" },
+      { "id": "ngk_bot", "alt": "NGK Bot Project", "title": "NGK Bot", "tag": "Telegram Bot", "description": "An intelligent Telegram bot that provides information about the Navoi Mining and Metallurgical Combinat (NMMC) and answers questions.", "buttonText": "View" },
+      { "id": "quiz_bot", "alt": "Quiz Bot Project", "title": "Quiz Bot", "tag": "Telegram Bot", "description": "A bot for conducting quizzes on Telegram, maintaining ratings, and identifying winners.", "buttonText": "View" }
+    ]
+  },
+  "work": {
+    "title": "Work Experience and Education",
+    "list": [
+      { "id": "raya_dunia", "img_id": "RayaDuniaImg", "date": "2024 - Present", "type": "work", "title": "Raya Dunia", "subtitle": "Tashkent, Uzbekistan", "description": "Full Stack (NodeJS+ReactJS) Developer" },
+      { "id": "najot_talim", "img_id": "NajotTalimImg", "date": "2023 - 2024", "type": "education", "title": "Najot Ta'lim Training Center", "subtitle": "Tashkent, Uzbekistan", "description": "Full Stack (NodeJS+ReactJS) Programming Course" },
+      { "id": "uty", "img_id": "UTYImg", "date": "2016 - 2023", "type": "work", "title": "JSC Uzbekistan Railways", "subtitle": "Tashkent, Uzbekistan", "description": "Senior Inspector of the Chief Inspector's Office for Train Traffic Safety" },
+      { "id": "ttymi", "img_id": "TTYMIImg", "date": "2012 - 2016", "type": "education", "title": "Tashkent Institute of Railway Engineers", "subtitle": "Tashkent, Uzbekistan", "description": "Bachelor's degree in 'Ensuring the safety and technical operation of trains'" }
+    ]
+  }
+}

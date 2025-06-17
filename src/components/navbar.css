@@ -1,0 +1,33 @@
+.navbar-custom {
+  background-color: var(--navbar-bg-color) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar-custom .nav-link,
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-dropdown .nav-link {
+  color: var(--navbar-text-color) !important;
+}
+
+.navbar-custom .nav-link:hover {
+  color: var(--navbar-text-color) !important;
+  opacity: 0.8;
+}
+
+.theme-toggle-btn {
+    font-size: 1.2rem;
+    color: var(--navbar-text-color) !important;
+}
+
+.dropdown-menu {
+    background-color: var(--navbar-bg-color) !important;
+}
+
+.dropdown-item {
+    color: var(--navbar-text-color) !important;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}

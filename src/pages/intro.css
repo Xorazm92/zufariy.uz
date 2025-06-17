@@ -1,0 +1,17 @@
+.intro-section {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-text h1,
+.intro-text h2 {
+  color: var(--text-color);
+}
+
+.type-animation span {
+    color: var(--text-color) !important;
+}

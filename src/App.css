@@ -13,6 +13,42 @@
   }
 }
 
+/* Yorug' mavzu uchun standart ranglar */
+body[data-theme='light'] {
+  --background-color: #ffffff;
+  --text-color: #212529;
+  --navbar-bg-color: rgba(248, 249, 250, 0.8);
+  --navbar-text-color: #212529;
+  --card-bg-color: #f8f9fa;
+  --card-border-color: #dee2e6;
+  --timeline-element-bg: #f8f9fa;
+  --timeline-line-color: #dee2e6;
+}
+
+/* Qorong'u mavzu uchun ranglar */
+body[data-theme='dark'] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --navbar-bg-color: rgba(33, 37, 41, 0.8);
+  --navbar-text-color: #ffffff;
+  --card-bg-color: #1e1e1e;
+  --card-border-color: #444444;
+  --timeline-element-bg: #1e1e1e;
+  --timeline-line-color: #444444;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

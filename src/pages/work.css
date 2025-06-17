@@ -1,0 +1,22 @@
+.work-section {
+  background-color: var(--background-color);
+}
+
+.work-section h2 {
+  color: var(--text-color);
+}
+
+/* Timeline chizig'ining rangini mavzuga moslashtirish */
+.vertical-timeline::before {
+  background: var(--timeline-line-color) !important;
+}
+
+/* Timeline elementlaridagi matn va fon ranglari to'g'ridan-to'g'ri (inline) berilgani uchun
+   ular o'zgarishsiz qoladi, bu kutilgan natija. */
+.timeline-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}

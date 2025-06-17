@@ -1,46 +1,55 @@
-import React from "react";
-import { Link } from "react-scroll";
-import profilePic from "../res/profile.jpg"; // Rasm import qilindi
-
-import "./styles.css";
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import profilePic from '../res/profile.jpg';
+import { Navbar as BootstrapNavbar, Nav, NavDropdown, Button } from 'react-bootstrap';
+import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs';
+import { ThemeContext } from '../context/ThemeContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './navbar.css'; // styles.css o'rniga navbar.css
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <a className="navbar-brand navName" href="#">
-        <img
-          src={profilePic} // Import qilingan o'zgaruvchi ishlatildi
-          className="profile d-inline-block align-top"
-          alt="Profile"
-        />
-      </a>
-      <div className="collapse navbar-collapse" id="navbarText">
-        {/* Bootstrap 4 dagi 'mr-auto' Bootstrap 5 da 'me-auto' ga o'zgargan */}
-        <ul className="navbar-nav me-auto">
-          <li className="nav-item active">
-            <Link activeClass="active" className="nav-link" smooth spy to="intro">
-              Zufarbek Bobojonov
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link activeClass="active" className="nav-link" smooth spy to="work">
-              Work
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              activeClass="active"
-              className="nav-link"
-              smooth
-              spy
-              to="projects"
-            >
-              Projects
-            </Link>
-          </li>
-        </ul>
+    <BootstrapNavbar expand="lg" fixed="top" className="navbar-custom">
+      <div className="container-fluid">
+        <BootstrapNavbar.Brand as={NavLink} to="/">
+          <img
+            src={profilePic}
+            width="30"
+            height="30"
+            className="d-inline-block align-top rounded-circle me-2"
+            alt="Profile"
+          />
+          Zufariy
+        </BootstrapNavbar.Brand>
+        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
+        <BootstrapNavbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={NavLink} to="/" end>{t('navbar.intro')}</Nav.Link>
+            <Nav.Link as={NavLink} to="/projects">{t('navbar.projects')}</Nav.Link>
+            <Nav.Link as={NavLink} to="/work">{t('navbar.work')}</Nav.Link>
+            <Nav.Link as={NavLink} to="/stack">{t('navbar.stack')}</Nav.Link>
+          </Nav>
+          <Nav className="ms-auto d-flex align-items-center">
+            <NavDropdown title={t('language')} id="language-dropdown">
+              <NavDropdown.Item onClick={() => changeLanguage('uz')}>O'zbek</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => changeLanguage('ru')}>Русский</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => changeLanguage('en')}>English</NavDropdown.Item>
+            </NavDropdown>
+            <Button variant="link" onClick={toggleTheme} className="ms-2 theme-toggle-btn">
+              {theme === 'light' ? <BsMoonStarsFill /> : <BsSunFill color="white" />}
+            </Button>
+          </Nav>
+        </BootstrapNavbar.Collapse>
       </div>
-    </nav>
+    </BootstrapNavbar>
   );
 };
 
