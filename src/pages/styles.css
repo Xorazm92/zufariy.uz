@@ -1,0 +1,96 @@
+/* Intro */
+.intro-p {
+    display: inline-block;
+}
+
+.intro {
+    overflow: auto;
+    top: 0; right: 0; bottom: 0; left: 0;
+    display: flex;
+    position: relative;
+    height: 100vh;
+}
+
+.introText {
+    height: 100%;
+    position: relative;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 3em;
+    text-align: left;
+    padding: 10%;
+    width: 100%;
+}
+
+.highlight {
+    color: #0085ff;
+}
+
+body {
+    color: black;
+}
+
+/* Work */
+.work-title {
+    margin-left: 2%;
+    margin-top: 3%;
+}
+
+.work {
+    overflow: auto;
+    display: flex;
+    margin-top: 7%;
+    position: relative;
+}
+
+hr {
+    border-color: white;
+}
+
+.vertical-timeline.vertical-timeline-custom-line::before {
+    background: whitesmoke;
+}
+
+.vertical-timeline.vertical-timeline-custom-line .vertical-timeline-element--work .vertical-timeline-element-icon {
+    box-shadow: 0 0 0 4px #1976d2, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.vertical-timeline.vertical-timeline-custom-line .vertical-timeline-element--education .vertical-timeline-element-icon {
+    box-shadow: 0 0 0 4px #c2185b, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-pic {
+    width: 4em;
+    float: left;
+    margin-right: 1em;
+}
+
+.timeline-info {
+    display: inline-block;
+}
+
+.timeline-text {
+    float: right;
+}
+
+/* Projects */
+.button-container {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 2%;
+}
+
+i:hover {
+    color: rgb(149, 149, 149);
+}
+
+.title-tag {
+    font-style: italic;
+}
+
+/* Stack */
+.stack {
+    margin-top: 6%;
+    margin-left: 2%;
+}
