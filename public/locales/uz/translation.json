@@ -29,5 +29,45 @@
       { "id": "uty", "img_id": "UTYImg", "date": "2016 - 2023", "type": "work", "title": "O'zbekiston temir yo'llari AJ", "subtitle": "Toshkent, O'zbekiston", "description": "Poyezdlar harakat xavfsizligi bo'yicha bosh revizor apparati katta inspektori" },
       { "id": "ttymi", "img_id": "TTYMIImg", "date": "2012 - 2016", "type": "education", "title": "Toshkent Temir Yo'l Muhandislari Instituti", "subtitle": "Toshkent, O'zbekiston", "description": "Poyezdlar harakati xavfsizligini taminlash va texnik ekspluatatsiya mutaxassisligi bo'yicha Bakalavr" }
     ]
+  },
+  "stack": {
+    "title": "Texnologiyalar va Ko'nikmalar",
+    "categories": [
+      {
+        "title": "Dasturlash Tillari va Freymvorklar",
+        "skills": ["TypeScript", "NestJS", "ExpressJS", "React"]
+      },
+      {
+        "title": "Ma'lumotlar Bazalari",
+        "skills": ["PostgreSQL", "MongoDB", "Redis"]
+      },
+      {
+        "title": "ORM vositalari",
+        "skills": ["Prisma", "TypeORM", "Sequelize"]
+      },
+      {
+        "title": "API Protokollari",
+        "skills": ["REST", "GraphQL", "gRPC", "Swagger"]
+      },
+      {
+        "title": "DevOps",
+        "skills": ["Docker", "GitHub Actions", "AWS", "GCP", "DigitalOcean"]
+      },
+      {
+        "title": "Arxitektura",
+        "skills": ["Microservices", "RabbitMQ", "OOP"]
+      },
+      {
+        "title": "Boshqa vositalar",
+        "skills": ["Appsheet", "Excel", "Word", "1C Buxgalteriya"]
+      }
+    ]
+  },
+  "pages": {
+    "home": "Bosh Sahifa | Zufarbek Bobojonov - Full Stack Dasturchi",
+    "projects": "Loyihalar | Zufarbek Bobojonov",
+    "work": "Ish Tajribasi | Zufarbek Bobojonov",
+    "stack": "Texnologiyalar | Zufarbek Bobojonov",
+    "meta_description": "Zufarbek Bobojonovning portfoliоsi. Backend tizimlari, avtomatlashtirish va NestJS, TypeScript yordamida kengaytiriladigan ilovalarni yaratishga ixtisoslashgan Full Stack Dasturchi."
   }
 }

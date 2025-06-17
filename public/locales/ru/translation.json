@@ -29,5 +29,45 @@
       { "id": "uty", "img_id": "UTYImg", "date": "2016 - 2023", "type": "work", "title": "АО «Узбекистон темир йуллари»", "subtitle": "Ташкент, Узбекистан", "description": "Старший инспектор аппарата главного ревизора по безопасности движения поездов" },
       { "id": "ttymi", "img_id": "TTYMIImg", "date": "2012 - 2016", "type": "education", "title": "Ташкентский Институт Инженеров Железнодорожного Транспорта", "subtitle": "Ташкент, Узбекистан", "description": "Бакалавр по специальности 'Обеспечение безопасности и техническая эксплуатация поездов'" }
     ]
+  },
+  "stack": {
+    "title": "Технологии и Навыки",
+    "categories": [
+      {
+        "title": "Языки и Фреймворки",
+        "skills": ["TypeScript", "NestJS", "ExpressJS", "React"]
+      },
+      {
+        "title": "Базы данных",
+        "skills": ["PostgreSQL", "MongoDB", "Redis"]
+      },
+      {
+        "title": "Инструменты ORM",
+        "skills": ["Prisma", "TypeORM", "Sequelize"]
+      },
+      {
+        "title": "Протоколы API",
+        "skills": ["REST", "GraphQL", "gRPC", "Swagger"]
+      },
+      {
+        "title": "DevOps",
+        "skills": ["Docker", "GitHub Actions", "AWS", "GCP", "DigitalOcean"]
+      },
+      {
+        "title": "Архитектура",
+        "skills": ["Microservices", "RabbitMQ", "OOP"]
+      },
+      {
+        "title": "Другие инструменты",
+        "skills": ["Appsheet", "Excel", "Word", "1C Buxgalteriya"]
+      }
+    ]
+  },
+  "pages": {
+    "home": "Главная | Зуфарбек Бобожонов - Full Stack Разработчик",
+    "projects": "Проекты | Зуфарбек Бобожонов",
+    "work": "Опыт работы | Зуфарбек Бобожонов",
+    "stack": "Технологии | Зуфарбек Бобожонов",
+    "meta_description": "Портфолио Зуфарбека Бобожонова, Full Stack разработчика, специализирующегося на бэкенд-системах, автоматизации и создании масштабируемых приложений с использованием NestJS, TypeScript и других технологий."
   }
 }

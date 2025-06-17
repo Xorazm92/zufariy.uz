@@ -1,0 +1,55 @@
+.stack-section {
+  background-color: var(--background-color);
+  padding: 6rem 0;
+  min-height: 100vh;
+}
+
+.stack-section h2 {
+  color: var(--text-color);
+}
+
+.stack-category {
+  margin-bottom: 3rem;
+}
+
+.stack-category h4 {
+  color: var(--text-color);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.skills-grid {
+  display: grid;
+  /* Har bir ustun kamida 100px, maksimal 1fr (teng) bo'lsin */
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 2.5rem;
+  justify-items: center;
+}
+
+.skill-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: var(--card-bg-color);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  width: 100%;
+  height: 100%;
+}
+
+.skill-icon-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.skill-icon-container p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}

@@ -29,5 +29,45 @@
       { "id": "uty", "img_id": "UTYImg", "date": "2016 - 2023", "type": "work", "title": "JSC Uzbekistan Railways", "subtitle": "Tashkent, Uzbekistan", "description": "Senior Inspector of the Chief Inspector's Office for Train Traffic Safety" },
       { "id": "ttymi", "img_id": "TTYMIImg", "date": "2012 - 2016", "type": "education", "title": "Tashkent Institute of Railway Engineers", "subtitle": "Tashkent, Uzbekistan", "description": "Bachelor's degree in 'Ensuring the safety and technical operation of trains'" }
     ]
+  },
+  "stack": {
+    "title": "Technologies & Skills",
+    "categories": [
+      {
+        "title": "Languages & Frameworks",
+        "skills": ["TypeScript", "NestJS", "ExpressJS", "React"]
+      },
+      {
+        "title": "Databases",
+        "skills": ["PostgreSQL", "MongoDB", "Redis"]
+      },
+      {
+        "title": "ORM Tools",
+        "skills": ["Prisma", "TypeORM", "Sequelize"]
+      },
+      {
+        "title": "API Protocols",
+        "skills": ["REST", "GraphQL", "gRPC", "Swagger"]
+      },
+      {
+        "title": "DevOps",
+        "skills": ["Docker", "GitHub Actions", "AWS", "GCP", "DigitalOcean"]
+      },
+      {
+        "title": "Architecture",
+        "skills": ["Microservices", "RabbitMQ", "OOP"]
+      },
+      {
+        "title": "Other Tools",
+        "skills": ["Appsheet", "Excel", "Word", "1C Buxgalteriya"]
+      }
+    ]
+  },
+  "pages": {
+    "home": "Home | Zufarbek Bobojonov - Full Stack Developer",
+    "projects": "Projects | Zufarbek Bobojonov",
+    "work": "Work Experience | Zufarbek Bobojonov",
+    "stack": "Technologies | Zufarbek Bobojonov",
+    "meta_description": "Portfolio of Zufarbek Bobojonov, a Full Stack Developer specializing in backend systems, automation, and building scalable applications with NestJS, TypeScript, and more."
   }
 }

@@ -1,5 +1,7 @@
 .work-section {
   background-color: var(--background-color);
+  padding-top: 8rem !important;
+  min-height: 100vh;
 }
 
 .work-section h2 {

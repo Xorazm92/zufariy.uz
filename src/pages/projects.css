@@ -1,6 +1,7 @@
 .projects-section {
   background-color: var(--background-color);
-  padding: 5rem 0;
+  padding-top: 8rem !important;
+  min-height: 100vh;
 }
 
 .projects-section h2 {

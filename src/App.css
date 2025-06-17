@@ -37,6 +37,10 @@ body[data-theme='dark'] {
   --timeline-line-color: #444444;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

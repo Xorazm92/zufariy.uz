@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import "./projects.css";
 
@@ -17,7 +18,11 @@ const Projects = ({ id }) => {
   const projectsList = t('projects.list', { returnObjects: true });
 
   return (
-    <div id={id} className="projects-section">
+    <>
+      <Helmet>
+        <title>{t('pages.projects')}</title>
+      </Helmet>
+      <div id={id} className="projects-section container py-5">
       <h2 className="projects-title text-center mb-5">{t('projects.title')}</h2>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {Array.isArray(projectsList) && projectsList.map((project, index) => (
@@ -44,7 +49,8 @@ const Projects = ({ id }) => {
           </div>
         ))}
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
