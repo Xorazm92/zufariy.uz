@@ -47,6 +47,12 @@
   box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
+.skill-image-icon {
+  width: 48px; /* 3em ga teng */
+  height: 48px;
+  object-fit: contain;
+}
+
 .skill-icon-container p {
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -55,20 +61,27 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 992px) { /* For smaller desktops and large tablets */
   .skills-grid {
-    gap: 1.5rem;
+    gap: 2rem;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) { /* For tablets */
+  .skills-grid {
+    gap: 1.5rem;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 576px) { /* For mobile phones */
   .stack-section {
     padding: 4rem 0;
   }
 
   .skills-grid {
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .skill-icon-container p {
@@ -78,4 +91,11 @@
   .stack-category h4 {
     font-size: 1.25rem;
   }
+}
+
+@media (max-width: 420px) { /* For very small screens */
+    .skills-grid {
+        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

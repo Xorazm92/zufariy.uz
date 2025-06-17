@@ -10,6 +10,7 @@ import { VscServerProcess } from 'react-icons/vsc';
 import { TbApi } from 'react-icons/tb';
 import { BsBoxes } from 'react-icons/bs';
 import { GrDocumentText } from 'react-icons/gr';
+import icon1C from '../res/1C.png'; // 1C ikonkasi import qilindi
 
 // Ko'nikma nomini uning ikonkasiga va rangiga bog'lash
 const iconMap = {
@@ -38,18 +39,32 @@ const iconMap = {
   appsheet: { icon: SiGooglesheets, color: '#217346' },
   excel: { icon: FaFileExcel, color: '#217346' },
   word: { icon: FaFileWord, color: '#2B579A' },
-  '1c buxgalteriya': { icon: GrDocumentText, color: '#FDDA0D' },
+  '1c buxgalteriya': { src: icon1C, type: 'image' },
 };
 
 const SkillIcon = ({ name }) => {
   const skillKey = name.toLowerCase();
   const IconData = iconMap[skillKey];
-  const IconComponent = IconData ? IconData.icon : GrDocumentText;
-  const color = IconData ? IconData.color : '#6c757d';
+
+  // Agar ko'nikma map'da topilmasa, standart ikonkadan foydalanish
+  if (!IconData) {
+    return (
+      <div className="skill-icon-container">
+        <GrDocumentText style={{ color: '#6c757d' }} size="3em" />
+        <p>{name}</p>
+      </div>
+    );
+  }
+
+  const { type, src, icon: IconComponent, color } = IconData;
 
   return (
     <div className="skill-icon-container">
-      <IconComponent style={{ color }} size="3em" />
+      {type === 'image' ? (
+        <img src={src} alt={`${name} icon`} className="skill-image-icon" />
+      ) : (
+        <IconComponent style={{ color: color || '#6c757d' }} size="3em" />
+      )}
       <p>{name}</p>
     </div>
   );

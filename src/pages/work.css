@@ -22,3 +22,39 @@
     object-fit: cover;
     border: 2px solid #fff;
 }
+
+/* Responsive Styles for Vertical Timeline */
+@media screen and (max-width: 1170px) {
+  .vertical-timeline-element-content .vertical-timeline-element-date {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .vertical-timeline-element > div {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .vertical-timeline-element-content .vertical-timeline-element-date {
+    font-size: 1rem;
+    top: -1.5em;
+  }
+
+  .timeline-pic {
+    width: 50px;
+    height: 50px;
+  }
+
+  .vertical-timeline-element-title {
+    font-size: 1.2rem;
+  }
+
+  .vertical-timeline-element-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .vertical-timeline-element p {
+    font-size: 0.9rem;
+  }
+}

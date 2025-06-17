@@ -18,6 +18,9 @@ const Links = () => {
         <a href="https://devpost.com/rayadunia2021?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav" target="_blank" rel="noopener noreferrer">
           <i className='fas fa-code fa-3x blackiconcolor'></i>
         </a>
+        <a href="https://t.me/Zufar_Xorazmiy" target="_blank" rel="noopener noreferrer">
+          <i className="fab fa-telegram-plane fa-3x blackiconcolor"></i>
+        </a>
       </div>
     </div>
   );

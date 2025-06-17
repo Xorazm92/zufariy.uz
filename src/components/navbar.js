@@ -27,7 +27,7 @@ const Navbar = () => {
             className="d-inline-block align-top rounded-circle me-2"
             alt="Profile"
           />
-          Zufariy
+          Zufarbek
         </BootstrapNavbar.Brand>
         <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
