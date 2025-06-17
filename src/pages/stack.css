@@ -53,3 +53,29 @@
   font-weight: 500;
   color: var(--text-secondary);
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .skills-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .stack-section {
+    padding: 4rem 0;
+  }
+
+  .skills-grid {
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+
+  .skill-icon-container p {
+    font-size: 0.8rem;
+  }
+
+  .stack-category h4 {
+    font-size: 1.25rem;
+  }
+}
