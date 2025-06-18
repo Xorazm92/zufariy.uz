@@ -13,12 +13,12 @@
   "projects": {
     "title": "My Projects",
     "list": [
-      { "id": "datagaze", "alt": "DataGaze Project", "title": "DataGaze", "tag": "Data Visualization", "description": "A platform for analyzing data and visualizing it through interactive charts.", "buttonText": "View" },
-      { "id": "crm", "alt": "CRM Project", "title": "CRM", "tag": "Customer Relationship Management", "description": "A CRM system for storing customer information, managing relationships, and automating sales processes.", "buttonText": "View" },
-      { "id": "nasiya", "alt": "Nasiya Savdo Project", "title": "Nasiya Savdo", "tag": "Automated Trading System", "description": "A web application to automate installment sales operations, track debts, and generate reports.", "buttonText": "View" },
-      { "id": "quiz_app", "alt": "Quiz App Project", "title": "Quiz App", "tag": "Online Quiz", "description": "A platform with tests and quizzes on various topics for users to test their knowledge.", "buttonText": "View" },
-      { "id": "ngk_bot", "alt": "NGK Bot Project", "title": "NGK Bot", "tag": "Telegram Bot", "description": "An intelligent Telegram bot that provides information about the Navoi Mining and Metallurgical Combinat (NMMC) and answers questions.", "buttonText": "View" },
-      { "id": "quiz_bot", "alt": "Quiz Bot Project", "title": "Quiz Bot", "tag": "Telegram Bot", "description": "A bot for conducting quizzes on Telegram, maintaining ratings, and identifying winners.", "buttonText": "View" }
+      { "id": "datagaze", "link": "https://datagaze.zufariy.uz", "alt": "DataGaze project", "title": "DataGaze", "tag": "Data Visualization", "description": "A platform for analyzing data and visualizing it through interactive charts.", "buttonText": "View" },
+      { "id": "crm", "link": "https://crm.zufariy.uz", "alt": "CRM project", "title": "CRM", "tag": "Customer Relationship Management", "description": "A CRM system for storing customer data, managing relationships, and automating sales processes.", "buttonText": "View" },
+      { "id": "nasiya", "link": "https://nasiya.zufariy.uz", "alt": "Installment Sales project", "title": "Installment Sales", "tag": "Automated Sales System", "description": "A web application to automate installment sales operations, track debt, and generate reports.", "buttonText": "View" },
+      { "id": "quiz_app", "link": "https://quiz.zufariy.uz", "alt": "Quiz App project", "title": "Quiz App", "tag": "Online Quiz", "description": "A platform with tests and quizzes on various topics for users to test their knowledge.", "buttonText": "View" },
+      { "id": "ngk_bot", "link": "https://t.me/@NGK_uchun_bot", "alt": "NGK Bot project", "title": "NGK Bot", "tag": "Telegram Bot", "description": "An intelligent Telegram bot that provides information and answers questions about the Navoi Mining and Metallurgical Combinat (NMMC).", "buttonText": "View" },
+      { "id": "quiz_bot", "link": "https://t.me/@NBTExamBot", "alt": "Quiz Bot project", "title": "Quiz Bot", "tag": "Telegram Bot", "description": "A bot designed for conducting quizzes, maintaining ratings, and identifying winners via Telegram.", "buttonText": "View" }
     ]
   },
   "work": {
