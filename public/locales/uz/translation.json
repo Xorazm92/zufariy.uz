@@ -17,7 +17,7 @@
       { "id": "crm", "link": "https://crm.zufariy.uz", "alt": "CRM loyihasi", "title": "CRM", "tag": "Mijozlar Bilan Ishlash Tizimi", "description": "Mijozlar ma'lumotlarini saqlash, ular bilan munosabatlarni boshqarish va sotuv jarayonlarini avtomatlashtirish uchun CRM tizimi.", "buttonText": "Ko'rish" },
       { "id": "nasiya", "link": "https://nasiya.zufariy.uz", "alt": "Nasiya Savdo loyihasi", "title": "Nasiya Savdo", "tag": "Avtomatlashtirilgan Savdo Tizimi", "description": "Nasiya savdo operatsiyalarini avtomatlashtirish, qarzdorlikni kuzatish va hisobotlar yaratish uchun veb-ilova.", "buttonText": "Ko'rish" },
       { "id": "quiz_app", "link": "https://quiz.zufariy.uz", "alt": "Quiz App loyihasi", "title": "Quiz App", "tag": "Onlayn Viktorina", "description": "Foydalanuvchilar o'z bilimlarini sinab ko'rishlari uchun turli mavzularda testlar va viktorinalar platformasi.", "buttonText": "Ko'rish" },
-      { "id": "ngk_bot", "link": "https://t.me/@NGK_uchun_bot", "alt": "NGK Bot loyihasi", "title": "NGK Bot", "tag": "Telegram Bot", "description": "Navoiy kon-metallurgiya kombinati (NGMK) haqida ma'lumot beruvchi, savollarga javob beruvchi aqlli Telegram bot.", "buttonText": "Ko'rish" },
+      { "id": "ngk_bot", "link": "https://t.me/@NGK_uchun_bot", "alt": "NGK Bot loyihasi", "title": "NGK Bot", "tag": "Telegram Bot", "description": "O'zbekiston temir yo'llari AJ kotibiyatining , savollarga javob beruvchi aqlli Telegram bot.", "buttonText": "Ko'rish" },
       { "id": "quiz_bot", "link": "https://t.me/@NBTExamBot", "alt": "Quiz Bot loyihasi", "title": "Quiz Bot", "tag": "Telegram Bot", "description": "Telegram orqali viktorinalar o'tkazish, reytinglarni yuritish va g'oliblarni aniqlash uchun mo'ljallangan bot.", "buttonText": "Ko'rish" }
     ]
   },
@@ -26,7 +26,7 @@
     "list": [
       { "id": "raya_dunia", "img_id": "RayaDuniaImg", "date": "2024 - Hozirgacha", "type": "work", "title": "Raya Dunia", "subtitle": "Toshkent, O'zbekiston", "description": "Full Stack (NodeJS+ReactJS) Dasturchi" },
       { "id": "najot_talim", "img_id": "NajotTalimImg", "date": "2023 - 2024", "type": "education", "title": "Najot Ta'lim O'quv Markazi", "subtitle": "Toshkent, O'zbekiston", "description": "Full Stack (NodeJS+ReactJS) Dasturlash kursi" },
-      { "id": "uty", "img_id": "UTYImg", "date": "2016 - 2023", "type": "work", "title": "O'zbekiston temir yo'llari AJ", "subtitle": "Toshkent, O'zbekiston", "description": "Poyezdlar harakat xavfsizligi bo'yicha bosh revizor apparati katta inspektori" },
+      { "id": "uty", "img_id": "UTYImg", "date": "2016 - 2023", "type": "work", "title": "O'zbekiston temir yo'llari AJ", "subtitle": "Toshkent, O'zbekiston", "description": "Poyezdlar harakat xavfsizligi bo'yicha mehnat muhofazasi va sanoat xavfsizligi muhandisi" },
       { "id": "ttymi", "img_id": "TTYMIImg", "date": "2012 - 2016", "type": "education", "title": "Toshkent Temir Yo'l Muhandislari Instituti", "subtitle": "Toshkent, O'zbekiston", "description": "Poyezdlar harakati xavfsizligini taminlash va texnik ekspluatatsiya mutaxassisligi bo'yicha Bakalavr" }
     ]
   },
