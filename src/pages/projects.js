@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import "./projects.css";
+import { Modal, Button } from 'react-bootstrap';
+import { motion } from 'framer-motion';
 
 // Loyiha rasmlari
 const imageMap = {
@@ -13,9 +15,47 @@ const imageMap = {
   quiz_bot: require("../res/projects/quiz-bot.png"),
 };
 
+function Card3D({ children }) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0, shadow: 0.12 });
+  const onMove = useCallback((e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width; // 0..1
+    const py = (e.clientY - rect.top) / rect.height; // 0..1
+    const rx = (py - 0.5) * -10; // rotateX
+    const ry = (px - 0.5) * 10;  // rotateY
+    setTilt({ x: rx, y: ry, shadow: 0.22 });
+  }, []);
+  const onLeave = useCallback(() => setTilt({ x: 0, y: 0, shadow: 0.12 }), []);
+
+  return (
+    <motion.div
+      className="card-3d-wrapper"
+      style={{ perspective: 900 }}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+    >
+      <motion.div
+        className="card card-3d h-100 shadow-sm"
+        style={{
+          transformStyle: 'preserve-3d',
+          boxShadow: `0 20px 40px rgba(0,0,0,${tilt.shadow})`
+        }}
+        animate={{ rotateX: tilt.x, rotateY: tilt.y }}
+        transition={{ type: 'spring', stiffness: 200, damping: 20, mass: 0.5 }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
 const Projects = ({ id }) => {
   const { t } = useTranslation();
   const projectsList = t('projects.list', { returnObjects: true });
+  const [show, setShow] = useState(false);
+  const [active, setActive] = useState(null);
+  const openDetails = (p) => { setActive(p); setShow(true); };
+  const closeDetails = () => setShow(false);
 
   return (
     <>
@@ -27,29 +67,62 @@ const Projects = ({ id }) => {
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {Array.isArray(projectsList) && projectsList.map((project, index) => (
           <div className="col" key={index}>
-            <div className="card h-100 shadow-sm">
+            <Card3D>
               <img src={imageMap[project.id]} className="card-img-top" alt={project.alt} />
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title fw-bold">{project.title}</h5>
                 <h6 className="title-tag text-muted">{project.tag}</h6>
                 <p className="card-text">{project.description}</p>
-                <div className="button-container mt-auto text-center">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-outline-dark btn-lg"
-                    role="button"
-                  >
-                    {project.buttonText}
-                  </a>
+                <div className="d-flex flex-wrap gap-2 mt-auto justify-content-center">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline-dark btn-sm"
+                      role="button"
+                    >
+                      {project.buttonText}
+                    </a>
+                  )}
+                  <Button size="sm" variant="primary" onClick={() => openDetails(project)}>
+                    {t('projects.details') || 'Details'}
+                  </Button>
                 </div>
               </div>
-            </div>
+            </Card3D>
           </div>
         ))}
       </div>
       </div>
+
+      <Modal show={show} onHide={closeDetails} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>{active?.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {active && (
+            <>
+              <img src={imageMap[active.id]} alt={active.alt} className="img-fluid rounded mb-3" />
+              <p className="mb-2">{active.description}</p>
+              {active.tech && <p className="text-muted"><strong>Tech:</strong> {active.tech}</p>}
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          {active?.link && (
+            <a href={active.link} target="_blank" rel="noopener noreferrer" className="btn btn-dark">
+              {active.buttonText}
+            </a>
+          )}
+          {active?.repo && (
+            <a href={active.repo} target="_blank" rel="noopener noreferrer" className="btn btn-outline-secondary">
+              GitHub
+            </a>
+          )}
+          <Button variant="secondary" onClick={closeDetails}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

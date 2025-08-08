@@ -5,14 +5,16 @@
     border-radius: 50%;
     width: 50px;
 }
+
+/* Hero/social links modern layout */
 .links {
-    position: absolute;
-    bottom: 7.5vmin;
-    letter-spacing: 2em;
-    left: 0; 
-    right: 0; 
-    margin: auto; 
-    text-align: center;
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    z-index: 1; /* above canvas */
 }
 
 .nav-text {
@@ -21,9 +23,11 @@
 }
 
 .blackiconcolor {
-    color:black;
+    color: var(--text-color);
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .blackiconcolor:hover {
-    color: #0085ff
+    color: #0085ff;
+    transform: translateY(-2px);
 }

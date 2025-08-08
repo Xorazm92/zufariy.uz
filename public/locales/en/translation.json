@@ -3,8 +3,10 @@
     "intro": "Home",
     "projects": "Projects",
     "work": "Experience",
-    "stack": "Stack"
+    "stack": "Stack",
+    "contact": "Contact"
   },
+  "language": "Language",
   "intro": {
     "greeting": "Hello, my name is Zufarbek Bobojonov Karimberganovich.",
     "role": "I am a Full Stack (NodeJS+ReactJS) developer.",
@@ -63,11 +65,31 @@
       }
     ]
   },
+  "contact": {
+    "title": "Get in touch",
+    "subtitle": "Feel free to reach out for collaboration, project inquiries, or job opportunities.",
+    "prefer": "For a quick response, use the following:",
+    "thanks": "Thanks! Your message has been received.",
+    "form": {
+      "title": "Send a message",
+      "name": "Name",
+      "name_ph": "Your full name",
+      "email": "Email",
+      "message": "Message",
+      "message_ph": "Write a brief message",
+      "send": "Send"
+    }
+  },
+  "notfound": {
+    "title": "Page not found",
+    "back": "Back to Home"
+  },
   "pages": {
     "home": "Home | Zufarbek Bobojonov - Full Stack Developer",
     "projects": "Projects | Zufarbek Bobojonov",
     "work": "Work Experience | Zufarbek Bobojonov",
     "stack": "Technologies | Zufarbek Bobojonov",
+    "contact": "Contact | Zufarbek Bobojonov",
     "meta_description": "Portfolio of Zufarbek Bobojonov, a Full Stack Developer specializing in backend systems, automation, and building scalable applications with NestJS, TypeScript, and more."
   }
 }

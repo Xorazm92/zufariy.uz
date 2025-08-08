@@ -37,6 +37,7 @@ const Navbar = () => {
             <Nav.Link as={NavLink} to="/projects">{t('navbar.projects')}</Nav.Link>
             <Nav.Link as={NavLink} to="/work">{t('navbar.work')}</Nav.Link>
             <Nav.Link as={NavLink} to="/stack">{t('navbar.stack')}</Nav.Link>
+            <Nav.Link as={NavLink} to="/contact">{t('navbar.contact')}</Nav.Link>
           </Nav>
           <Nav className="ms-auto d-flex align-items-center">
             <NavDropdown title={t('language')} id="language-dropdown">

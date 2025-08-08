@@ -23,6 +23,9 @@ body[data-theme='light'] {
   --card-border-color: #dee2e6;
   --timeline-element-bg: #f8f9fa;
   --timeline-line-color: #dee2e6;
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --elevation-2: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* Qorong'u mavzu uchun ranglar */
@@ -35,6 +38,9 @@ body[data-theme='dark'] {
   --card-border-color: #444444;
   --timeline-element-bg: #1e1e1e;
   --timeline-line-color: #444444;
+  --glass-bg: rgba(18, 18, 18, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --elevation-2: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 html {
@@ -53,6 +59,16 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Global glass card */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--elevation-2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -66,4 +82,20 @@ body {
 
 .App-link {
   color: #61dafb;
+}
+
+/* Fullscreen WebGL background container */
+.bg-canvas-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* Background shouldn't block UI */
+}
+
+/* Foreground app content sits above background */
+.app-shell {
+  position: relative;
+  z-index: 1;
 }

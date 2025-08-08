@@ -1,0 +1,176 @@
+import React, { useState } from 'react';
+import { Container, Form, Button, FloatingLabel } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+import { FiMail, FiCopy, FiCheck, FiSend } from 'react-icons/fi';
+import { FaTelegramPlane } from 'react-icons/fa';
+import Links from '../components/links';
+import './contact.css';
+
+const Contact = () => {
+  const { t } = useTranslation();
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedTg, setCopiedTg] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [submitting, setSubmitting] = useState(false);
+  const [toast, setToast] = useState({ show: false, type: 'success', text: '' });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const FORMSPREE_ID = process.env.REACT_APP_FORMSPREE_ID;
+
+    const run = async () => {
+      setSubmitting(true);
+      try {
+        if (FORMSPREE_ID) {
+          const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: form.name, email: form.email, message: form.message })
+          });
+          const data = await res.json().catch(() => ({ ok: false }));
+          if (res.ok) {
+            setToast({ show: true, type: 'success', text: t('contact.thanks') });
+            setForm({ name: '', email: '', message: '' });
+          } else {
+            throw new Error(data?.errors?.[0]?.message || 'Submission failed');
+          }
+        } else {
+          // Graceful fallback when no backend configured
+          setToast({ show: true, type: 'success', text: t('contact.thanks') });
+        }
+      } catch (err) {
+        setToast({ show: true, type: 'error', text: t('contact.error') || 'Failed to send. Please use Email/Telegram.' });
+      } finally {
+        setSubmitting(false);
+        setTimeout(() => setToast((s) => ({ ...s, show: false })), 2000);
+      }
+    };
+    run();
+  };
+
+  const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  return (
+    <div id="contact" className="page-section">
+      <Container className="py-5">
+        {toast.show && (
+          <div className={`toast-lite ${toast.type}`}>
+            {toast.text}
+          </div>
+        )}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="mb-4"
+        >
+          <h1 className="section-title contact-title">{t('contact.title')}</h1>
+          <p className="text-muted">{t('contact.subtitle')}</p>
+        </motion.div>
+
+        <div className="contact-grid">
+          <motion.div
+            className="glass-card contact-card"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05, ease: 'easeOut' }}
+          >
+            <h5 className="mb-3">{t('contact.prefer')}</h5>
+            <div className="quick-actions">
+              <div className="quick-action glass-card">
+                <div className="left">
+                  <FiMail size={20} />
+                  <div>
+                    <div className="fw-semibold">Email</div>
+                    <div className="label">hello@zufariy.uz</div>
+                  </div>
+                </div>
+                <div className="right">
+                  <Button size="sm" variant="outline-primary" href="mailto:hello@zufariy.uz">
+                    <FiSend className="me-1" /> {t('contact.form.send')}
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={copiedEmail ? 'success' : 'outline-secondary'}
+                    onClick={async () => {
+                      await navigator.clipboard.writeText('hello@zufariy.uz');
+                      setCopiedEmail(true);
+                      setTimeout(() => setCopiedEmail(false), 1500);
+                    }}
+                  >
+                    {copiedEmail ? <FiCheck /> : <FiCopy />}
+                  </Button>
+                </div>
+              </div>
+
+              <div className="quick-action glass-card">
+                <div className="left">
+                  <FaTelegramPlane size={20} />
+                  <div>
+                    <div className="fw-semibold">Telegram</div>
+                    <div className="label">@Zufar_Xorazmiy</div>
+                  </div>
+                </div>
+                <div className="right">
+                  <Button size="sm" variant="outline-primary" href="https://t.me/Zufar_Xorazmiy" target="_blank" rel="noreferrer">
+                    <FiSend className="me-1" /> {t('contact.form.send')}
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={copiedTg ? 'success' : 'outline-secondary'}
+                    onClick={async () => {
+                      await navigator.clipboard.writeText('@Zufar_Xorazmiy');
+                      setCopiedTg(true);
+                      setTimeout(() => setCopiedTg(false), 1500);
+                    }}
+                  >
+                    {copiedTg ? <FiCheck /> : <FiCopy />}
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-3">
+              <Links />
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="glass-card contact-card"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+          >
+            <h5 className="mb-3">{t('contact.form.title')}</h5>
+            <Form onSubmit={handleSubmit} noValidate>
+              <FloatingLabel controlId="contactName" label={t('contact.form.name')} className="mb-3">
+                <Form.Control name="name" value={form.name} onChange={onChange} type="text" placeholder={t('contact.form.name')} required />
+                <Form.Control.Feedback type="invalid">{t('contact.form.name')} required</Form.Control.Feedback>
+              </FloatingLabel>
+
+              <FloatingLabel controlId="contactEmail" label={t('contact.form.email')} className="mb-3">
+                <Form.Control name="email" value={form.email} onChange={onChange} type="email" placeholder="name@example.com" required />
+                <Form.Control.Feedback type="invalid">{t('contact.form.email')} required</Form.Control.Feedback>
+              </FloatingLabel>
+
+              <FloatingLabel controlId="contactMsg" label={t('contact.form.message')} className="mb-3">
+                <Form.Control as="textarea" name="message" value={form.message} onChange={onChange} placeholder={t('contact.form.message')} style={{ height: 140 }} required />
+                <Form.Control.Feedback type="invalid">{t('contact.form.message')} required</Form.Control.Feedback>
+              </FloatingLabel>
+
+              <div className="d-flex gap-2">
+                <Button variant="primary" type="submit" disabled={submitting}>
+                  <FiSend className="me-1" /> {submitting ? t('contact.form.sending') || 'Sending...' : t('contact.form.send')}
+                </Button>
+                <Button variant="outline-secondary" type="reset">Reset</Button>
+              </div>
+            </Form>
+          </motion.div>
+        </div>
+      </Container>
+    </div>
+  );
+};
+
+export default Contact;

@@ -3,8 +3,10 @@
     "intro": "Bosh sahifa",
     "projects": "Loyihalar",
     "work": "Tajriba",
-    "stack": "Texnologiyalar"
+    "stack": "Texnologiyalar",
+    "contact": "Aloqa"
   },
+  "language": "Til",
   "intro": {
     "greeting": "Salom, mening ismim Zufarbek Bobojonov Karimberganovich.",
     "role": "Men Full Stack (NodeJS+ReactJS) dasturchiman.",
@@ -63,11 +65,31 @@
       }
     ]
   },
+  "contact": {
+    "title": "Men bilan bog'laning",
+    "subtitle": "Hamkorlik, loyiha yoki ish taklifi bo'lsa, bemalol yozing.",
+    "prefer": "Tezkor aloqa uchun quyidagi manzillardan foydalaning:",
+    "thanks": "Rahmat! Xabaringiz qabul qilindi.",
+    "form": {
+      "title": "Xabar yuborish",
+      "name": "Ism",
+      "name_ph": "To'liq ismingiz",
+      "email": "Email",
+      "message": "Xabar",
+      "message_ph": "Qisqacha xabar qoldiring",
+      "send": "Yuborish"
+    }
+  },
+  "notfound": {
+    "title": "Sahifa topilmadi",
+    "back": "Bosh sahifaga qaytish"
+  },
   "pages": {
     "home": "Bosh Sahifa | Zufarbek Bobojonov - Full Stack Dasturchi",
     "projects": "Loyihalar | Zufarbek Bobojonov",
     "work": "Ish Tajribasi | Zufarbek Bobojonov",
     "stack": "Texnologiyalar | Zufarbek Bobojonov",
+    "contact": "Aloqa | Zufarbek Bobojonov",
     "meta_description": "Zufarbek Bobojonovning portfoliоsi. Backend tizimlari, avtomatlashtirish va NestJS, TypeScript yordamida kengaytiriladigan ilovalarni yaratishga ixtisoslashgan Full Stack Dasturchi."
   }
 }
