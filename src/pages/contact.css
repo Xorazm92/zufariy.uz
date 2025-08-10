@@ -1,63 +1,160 @@
 /* Contact page modern UI */
 #contact.page-section {
-  padding-top: 3rem;
+  padding: 8rem 0 4rem 0;
+  background: var(--background-color);
+  min-height: 100vh;
+  position: relative;
+}
+
+#contact.page-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-accent);
+  opacity: 0.02;
+  z-index: 0;
 }
 
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 992px) {
   .contact-grid {
     grid-template-columns: 1fr 1fr;
     align-items: start;
+    gap: 3rem;
   }
 }
 
 .contact-card {
-  padding: 1.25rem;
+  padding: 2rem;
 }
 
 .contact-title {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
 }
 
 .quick-actions {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .quick-action {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-action::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  transition: left 0.3s ease;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.quick-action:hover::before {
+  left: 0;
+}
+
+.quick-action:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
 }
 
 .quick-action .left {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .quick-action .right {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .quick-action .right button {
   white-space: nowrap;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.quick-action .right .btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+}
+
+.quick-action .right .btn-primary:hover {
+  transform: scale(1.05);
 }
 
 .quick-action .label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.quick-action .fw-semibold {
   color: var(--text-color);
-  opacity: 0.85;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .copy-toast {
   font-size: 0.875rem;
+}
+
+/* Form improvements */
+.form-floating > .form-control {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.form-floating > .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.form-floating > label {
+  color: var(--text-muted);
+}
+
+.btn-success {
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
 }

@@ -1,25 +1,91 @@
 .projects-section {
-  background-color: var(--background-color);
-  padding-top: 8rem !important;
+  background: var(--background-color);
+  padding: 8rem 0 4rem 0 !important;
   min-height: 100vh;
+  position: relative;
+}
+
+.projects-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-secondary);
+  opacity: 0.02;
+  z-index: 0;
 }
 
 .projects-section h2 {
   color: var(--text-color);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
 }
 
 .project-card {
-  background-color: var(--card-bg-color) !important;
-  border: 1px solid var(--card-border-color) !important;
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
   color: var(--text-color) !important;
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--primary-color) !important;
 }
 
-.project-card .card-title,
-.project-card .card-text {
+.project-card:hover::before {
+  transform: scaleX(1);
+}
+
+.project-card .card-title {
   color: var(--text-color) !important;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.project-card .card-text {
+  color: var(--text-secondary) !important;
+  line-height: 1.6;
+}
+
+.project-card .btn {
+  border-radius: 12px;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.project-card .btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+}
+
+.project-card .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
 }

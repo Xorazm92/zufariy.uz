@@ -13,60 +13,247 @@
   }
 }
 
-/* Yorug' mavzu uchun standart ranglar */
+/* Zamonaviy va professional rang sxemasi - Light Theme */
 body[data-theme='light'] {
-  --background-color: #ffffff;
-  --text-color: #212529;
-  --navbar-bg-color: rgba(248, 249, 250, 0.8);
-  --navbar-text-color: #212529;
-  --card-bg-color: #f8f9fa;
-  --card-border-color: #dee2e6;
-  --timeline-element-bg: #f8f9fa;
-  --timeline-line-color: #dee2e6;
-  --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --elevation-2: 0 8px 24px rgba(0, 0, 0, 0.08);
+  /* Asosiy ranglar */
+  --background-color: #fafbfc;
+  --background-secondary: #f8fafc;
+  --text-color: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+
+  /* Accent ranglar */
+  --primary-color: #667eea;
+  --primary-hover: #5a67d8;
+  --secondary-color: #764ba2;
+  --accent-color: #f093fb;
+  --success-color: #48bb78;
+  --warning-color: #ed8936;
+  --error-color: #f56565;
+
+  /* Gradient ranglar */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+  /* Navbar */
+  --navbar-bg-color: rgba(250, 251, 252, 0.85);
+  --navbar-text-color: #2d3748;
+  --navbar-border: rgba(226, 232, 240, 0.8);
+  --dropdown-hover-bg: rgba(102, 126, 234, 0.1);
+
+  /* Cards va elementlar */
+  --card-bg-color: rgba(255, 255, 255, 0.9);
+  --card-border-color: rgba(226, 232, 240, 0.6);
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+  /* Glass effect */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+
+  /* Timeline */
+  --timeline-element-bg: rgba(255, 255, 255, 0.9);
+  --timeline-line-color: #e2e8f0;
+
+  /* Elevations */
+  --elevation-1: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --elevation-2: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --elevation-3: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Qorong'u mavzu uchun ranglar */
+/* Zamonaviy va professional rang sxemasi - Dark Theme */
 body[data-theme='dark'] {
-  --background-color: #121212;
-  --text-color: #ffffff;
-  --navbar-bg-color: rgba(33, 37, 41, 0.8);
-  --navbar-text-color: #ffffff;
-  --card-bg-color: #1e1e1e;
-  --card-border-color: #444444;
-  --timeline-element-bg: #1e1e1e;
-  --timeline-line-color: #444444;
-  --glass-bg: rgba(18, 18, 18, 0.5);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --elevation-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  /* Asosiy ranglar */
+  --background-color: #0f1419;
+  --background-secondary: #1a202c;
+  --text-color: #f7fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #a0aec0;
+
+  /* Accent ranglar */
+  --primary-color: #7c3aed;
+  --primary-hover: #8b5cf6;
+  --secondary-color: #06b6d4;
+  --accent-color: #f472b6;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+
+  /* Gradient ranglar */
+  --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+  --gradient-secondary: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+  --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+
+  /* Navbar */
+  --navbar-bg-color: rgba(15, 20, 25, 0.85);
+  --navbar-text-color: #f7fafc;
+  --navbar-border: rgba(45, 55, 72, 0.8);
+  --dropdown-hover-bg: rgba(124, 58, 237, 0.1);
+
+  /* Cards va elementlar */
+  --card-bg-color: rgba(26, 32, 44, 0.9);
+  --card-border-color: rgba(45, 55, 72, 0.6);
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+  /* Glass effect */
+  --glass-bg: rgba(26, 32, 44, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  /* Timeline */
+  --timeline-element-bg: rgba(26, 32, 44, 0.9);
+  --timeline-line-color: #4a5568;
+
+  /* Elevations */
+  --elevation-1: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --elevation-2: 0 10px 25px rgba(0, 0, 0, 0.4);
+  --elevation-3: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* navbar height offset */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1.6;
+  font-size: 16px;
+  font-weight: 400;
 }
 
-/* Global glass card */
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+h1 { font-size: 3.5rem; font-weight: 700; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-accent {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.25rem; }
+
+  body {
+    font-size: 14px;
+  }
+
+  .glass-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+
+  .glass-card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+}
+
+/* Zamonaviy Glass Card Effect */
 .glass-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  box-shadow: var(--elevation-2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  opacity: 0.8;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-3);
+  border-color: var(--primary-color);
+}
+
+/* Glass card variants */
+.glass-card-primary {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.glass-card-secondary {
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1));
+  border: 1px solid rgba(240, 147, 251, 0.2);
 }
 
 .App-header {
@@ -92,10 +279,133 @@ body {
   height: 100vh;
   z-index: 0;
   pointer-events: none; /* Background shouldn't block UI */
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.bg-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Foreground app content sits above background */
 .app-shell {
   position: relative;
   z-index: 1;
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.btn:focus,
+.form-control:focus,
+.nav-link:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-card {
+    background: var(--card-bg-color);
+    border: 2px solid var(--text-color);
+  }
+
+  .btn {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark mode improvements */
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme]) {
+    --background-color: #0f1419;
+    --text-color: #f7fafc;
+  }
+}
+
+/* Print styles */
+@media print {
+  .navbar,
+  .bg-canvas-container,
+  .glass-card::before {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* Loading animation */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--background-color);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--glass-border);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Pulse animation for cards */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
 }

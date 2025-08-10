@@ -1,30 +1,65 @@
 .stack-section {
-  background-color: var(--background-color);
-  padding: 6rem 0;
+  background: var(--background-color);
+  padding: 8rem 0 4rem 0;
   min-height: 100vh;
+  position: relative;
+}
+
+.stack-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-accent);
+  opacity: 0.02;
+  z-index: 0;
 }
 
 .stack-section h2 {
   color: var(--text-color);
+  text-align: center;
+  margin-bottom: 4rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
 }
 
 .stack-category {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
 }
 
 .stack-category h4 {
   color: var(--text-color);
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 0.5rem;
-  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.stack-category h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: translateX(-50%);
+  border-radius: 2px;
 }
 
 .skills-grid {
   display: grid;
-  /* Har bir ustun kamida 100px, maksimal 1fr (teng) bo'lsin */
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 2rem;
   justify-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .skill-icon-container {

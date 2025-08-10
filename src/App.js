@@ -43,7 +43,11 @@ function App() {
     <HelmetProvider>
       <ThemeProvider>
         <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <Suspense fallback="loading...">
+          <Suspense fallback={
+            <div className="loading-spinner">
+              <div className="spinner"></div>
+            </div>
+          }>
             <BackgroundCanvas />
             <div className="app-shell">
               <Meta />
