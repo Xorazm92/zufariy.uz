@@ -14,6 +14,7 @@ const Projects = React.lazy(() => import('./pages/projects'));
 const Work = React.lazy(() => import('./pages/work'));
 const Stack = React.lazy(() => import('./pages/stack'));
 const Contact = React.lazy(() => import('./pages/contact'));
+const Admin = React.lazy(() => import('./pages/admin'));
 const NotFound = React.lazy(() => import('./pages/notfound'));
 
 function App() {
@@ -129,6 +130,14 @@ function RouteTransitions() {
           element={
             <motion.div {...pageAnim} transition={transition}>
               <Contact id="contact" />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <motion.div {...pageAnim} transition={transition}>
+              <Admin id="admin" />
             </motion.div>
           }
         />

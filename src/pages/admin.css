@@ -1,0 +1,187 @@
+.admin-page {
+  background: var(--background-color);
+  min-height: 100vh;
+  padding-top: 6rem;
+}
+
+.admin-page h1 {
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.message-item {
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+  cursor: pointer;
+}
+
+.message-item:hover {
+  background: var(--glass-bg);
+  border-left-color: var(--primary-color);
+}
+
+.message-item.selected {
+  background: var(--glass-bg);
+  border-left-color: var(--primary-color);
+  box-shadow: var(--elevation-1);
+}
+
+.message-item.unreplied {
+  border-left-color: var(--warning-color);
+}
+
+.message-item.unreplied:hover,
+.message-item.unreplied.selected {
+  border-left-color: var(--primary-color);
+}
+
+.message-status {
+  min-width: 120px;
+  text-align: right;
+}
+
+.reply-preview {
+  background: var(--glass-bg);
+  padding: 0.5rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--success-color);
+  margin-top: 0.5rem;
+}
+
+.selected-message {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Glass card improvements for admin */
+.admin-page .glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--elevation-2);
+}
+
+.admin-page .card-header {
+  background: rgba(102, 126, 234, 0.1);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Responsive improvements */
+@media (max-width: 991px) {
+  .admin-page {
+    padding-top: 5rem;
+  }
+  
+  .message-item {
+    padding: 1rem;
+  }
+  
+  .message-status {
+    min-width: auto;
+    margin-top: 0.5rem;
+  }
+  
+  .d-flex.justify-content-between.align-items-start {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-page .container {
+    padding: 0 1rem;
+  }
+  
+  .admin-page h1 {
+    font-size: 1.5rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+}
+
+/* Animation improvements */
+.message-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.message-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.message-item:hover::before {
+  left: 100%;
+}
+
+/* Badge improvements */
+.badge {
+  font-size: 0.75rem;
+  padding: 0.35em 0.65em;
+}
+
+/* Form improvements */
+.admin-page .form-control {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-color);
+}
+
+.admin-page .form-control:focus {
+  background: var(--glass-bg);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+  color: var(--text-color);
+}
+
+.admin-page .btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+}
+
+.admin-page .btn-outline-primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.admin-page .btn-outline-primary:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Alert improvements */
+.admin-page .alert {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.admin-page .alert-success {
+  border-left: 4px solid var(--success-color);
+}
+
+.admin-page .alert-danger {
+  border-left: 4px solid var(--error-color);
+}
+
+.admin-page .alert-info {
+  border-left: 4px solid var(--primary-color);
+}

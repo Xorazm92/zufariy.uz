@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, FloatingLabel } from 'react-bootstrap';
+import { Container, Form, Button, FloatingLabel, Alert } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FiMail, FiCopy, FiCheck, FiSend } from 'react-icons/fi';
-import { FaTelegramPlane } from 'react-icons/fa';
+import { FiMail, FiCopy, FiCheck, FiSend, FiMessageCircle } from 'react-icons/fi';
+import { FaTelegramPlane, FaRobot } from 'react-icons/fa';
+import axios from 'axios';
 import Links from '../components/links';
 import './contact.css';
 
@@ -14,39 +15,82 @@ const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState({ show: false, type: 'success', text: '' });
+  const [botResponse, setBotResponse] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const FORMSPREE_ID = process.env.REACT_APP_FORMSPREE_ID;
+    setSubmitting(true);
+    setBotResponse(null);
 
-    const run = async () => {
-      setSubmitting(true);
-      try {
-        if (FORMSPREE_ID) {
+    try {
+      // Validate form
+      if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+        throw new Error('Barcha maydonlar to\'ldirilishi shart');
+      }
+
+      // Send to Telegram Bot API
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const response = await axios.post(`${API_URL}/api/contact`, {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        message: form.message.trim()
+      });
+
+      if (response.data.success) {
+        setToast({
+          show: true,
+          type: 'success',
+          text: 'Xabar muvaffaqiyatli yuborildi! Tez orada javob beramiz.'
+        });
+        setBotResponse({
+          messageId: response.data.messageId,
+          text: 'Xabaringiz Telegram botga yuborildi va admin ko\'rib chiqadi.'
+        });
+        setForm({ name: '', email: '', message: '' });
+      } else {
+        throw new Error(response.data.error || 'Xabar yuborishda xatolik');
+      }
+
+    } catch (error) {
+      console.error('Contact form error:', error);
+
+      // Fallback to Formspree if bot fails
+      const FORMSPREE_ID = process.env.REACT_APP_FORMSPREE_ID;
+      if (FORMSPREE_ID) {
+        try {
           const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: form.name, email: form.email, message: form.message })
           });
-          const data = await res.json().catch(() => ({ ok: false }));
+
           if (res.ok) {
-            setToast({ show: true, type: 'success', text: t('contact.thanks') });
+            setToast({ show: true, type: 'success', text: 'Xabar yuborildi (email orqali)' });
             setForm({ name: '', email: '', message: '' });
           } else {
-            throw new Error(data?.errors?.[0]?.message || 'Submission failed');
+            throw new Error('Formspree failed');
           }
-        } else {
-          // Graceful fallback when no backend configured
-          setToast({ show: true, type: 'success', text: t('contact.thanks') });
+        } catch (formspreeError) {
+          setToast({
+            show: true,
+            type: 'error',
+            text: 'Xabar yuborishda xatolik. Iltimos, to\'g\'ridan-to\'g\'ri email yoki Telegram orqali murojaat qiling.'
+          });
         }
-      } catch (err) {
-        setToast({ show: true, type: 'error', text: t('contact.error') || 'Failed to send. Please use Email/Telegram.' });
-      } finally {
-        setSubmitting(false);
-        setTimeout(() => setToast((s) => ({ ...s, show: false })), 2000);
+      } else {
+        setToast({
+          show: true,
+          type: 'error',
+          text: error.response?.data?.error || error.message || 'Xabar yuborishda xatolik yuz berdi'
+        });
       }
-    };
-    run();
+    } finally {
+      setSubmitting(false);
+      setTimeout(() => {
+        setToast((s) => ({ ...s, show: false }));
+        setBotResponse(null);
+      }, 5000);
+    }
   };
 
   const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -58,6 +102,22 @@ const Contact = () => {
           <div className={`toast-lite ${toast.type}`}>
             {toast.text}
           </div>
+        )}
+
+        {botResponse && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4"
+          >
+            <Alert variant="info" className="d-flex align-items-center">
+              <FaRobot className="me-2" size={20} />
+              <div>
+                <strong>Bot Javob #{botResponse.messageId}</strong>
+                <div className="small">{botResponse.text}</div>
+              </div>
+            </Alert>
+          </motion.div>
         )}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -129,6 +189,21 @@ const Contact = () => {
                   </Button>
                 </div>
               </div>
+
+              <div className="quick-action glass-card">
+                <div className="left">
+                  <FaRobot size={20} />
+                  <div>
+                    <div className="fw-semibold">Telegram Bot</div>
+                    <div className="label">Avtomatik javob</div>
+                  </div>
+                </div>
+                <div className="right">
+                  <Button size="sm" variant="outline-info" href="https://t.me/ZufarPortfolioBot" target="_blank" rel="noreferrer">
+                    <FiMessageCircle className="me-1" /> Bot
+                  </Button>
+                </div>
+              </div>
             </div>
 
             <div className="mt-3">
@@ -143,6 +218,14 @@ const Contact = () => {
             transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
           >
             <h5 className="mb-3">{t('contact.form.title')}</h5>
+            <div className="mb-3">
+              <Alert variant="info" className="d-flex align-items-start">
+                <FaRobot className="me-2 mt-1" size={16} />
+                <div className="small">
+                  <strong>Telegram Bot orqali:</strong> Xabaringiz to'g'ridan-to'g'ri mening Telegram botimga yuboriladi va men tezda javob beraman.
+                </div>
+              </Alert>
+            </div>
             <Form onSubmit={handleSubmit} noValidate>
               <FloatingLabel controlId="contactName" label={t('contact.form.name')} className="mb-3">
                 <Form.Control name="name" value={form.name} onChange={onChange} type="text" placeholder={t('contact.form.name')} required />
