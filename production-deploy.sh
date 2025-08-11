@@ -48,8 +48,8 @@ npm install || {
 
 # 3. Stop existing PM2 process
 print_status "Stopping existing server..."
-pm2 stop zufariy-server 2>/dev/null || print_warning "Server was not running"
-pm2 delete zufariy-server 2>/dev/null || print_warning "No existing process to delete"
+npx pm2 stop zufariy-server 2>/dev/null || print_warning "Server was not running"
+npx pm2 delete zufariy-server 2>/dev/null || print_warning "No existing process to delete"
 
 # 4. Build project with increased memory
 print_status "Building project..."
@@ -70,21 +70,21 @@ fi
 
 # 6. Start server with PM2
 print_status "Starting server..."
-pm2 start server/index.js --name "zufariy-server" --env production || {
+npx pm2 start server/index.js --name "zufariy-server" --env production || {
     print_error "Failed to start server!"
     exit 1
 }
 
 # 7. Save PM2 configuration
-pm2 save
+npx pm2 save
 
 # 8. Setup PM2 startup (if not already done)
-pm2 startup 2>/dev/null || print_warning "PM2 startup already configured"
+npx pm2 startup 2>/dev/null || print_warning "PM2 startup already configured"
 
 # 9. Check server status
 print_status "Checking server status..."
 sleep 3
-pm2 status
+npx pm2 status
 
 # 10. Test API endpoint
 print_status "Testing API..."
@@ -96,11 +96,11 @@ fi
 
 # 11. Show logs
 print_status "Recent logs:"
-pm2 logs zufariy-server --lines 5
+npx pm2 logs zufariy-server --lines 5
 
 print_success "Deploy completed successfully!"
 echo ""
 echo "🌐 Website: https://zufariy.uz"
-echo "📊 PM2 status: pm2 status"
+echo "📊 PM2 status: npx pm2 status"
 echo "📝 View logs: pm2 logs zufariy-server"
 echo "🔄 Restart: pm2 restart zufariy-server"

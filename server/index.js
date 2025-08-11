@@ -5,19 +5,43 @@ const TelegramBot = require('node-telegram-bot-api');
 const http = require('http');
 require('dotenv').config();
 
+// Security & utilities
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const pino = require('pino');
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
+const { body, validationResult } = require('express-validator');
+
+// DB helper
+const db = require('./db');
+
 const app = express();
 const server = http.createServer(app);
 
 // Middleware
-app.use(cors());
+app.use(helmet());
+app.use(cors({ origin: process.env.NODE_ENV === 'production' ? 'https://zufariy.uz' : '*' }));
 app.use(express.json());
+// Rate limiting: 100 requests per IP per hour
+app.use(rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 100,
+  message: { success: false, error: 'Too many requests, please try again later.' }
+}));
+// Request logging
+app.use((req, res, next) => {
+  logger.info({ method: req.method, url: req.url, ip: req.ip }, 'Incoming request');
+  next();
+});
 
 // Telegram Bot Setup
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID || '1234567890'; // Sizning Telegram chat ID'ingiz
 
-console.log('🔍 Debug: BOT_TOKEN =', BOT_TOKEN ? 'MAVJUD' : 'YO\'Q');
-console.log('🔍 Debug: CHAT_ID =', CHAT_ID);
+if (process.env.NODE_ENV !== 'production') {
+  console.log('🔍 Debug: BOT_TOKEN =', BOT_TOKEN ? 'MAVJUD' : 'YO\'Q');
+  console.log('🔍 Debug: CHAT_ID =', CHAT_ID);
+}
 
 let bot = null;
 if (BOT_TOKEN && BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE' && BOT_TOKEN.trim() !== '') {
@@ -32,9 +56,8 @@ if (BOT_TOKEN && BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE' && BOT_TOKEN.trim() !== '')
   console.log('⚠️ Bot token yo\'q yoki noto\'g\'ri, faqat Formspree ishlatiladi');
 }
 
-// In-memory storage for messages (production da database ishlatish kerak)
-let messages = [];
-let messageId = 1;
+// Persistent storage using SQLite (db.js). The table is created on first run.
+let messageId = 1; // kept for compatibility, but DB auto‑increments IDs
 
 // Bot commands (faqat bot mavjud bo'lsa)
 if (bot) {
@@ -72,51 +95,49 @@ Salom! Men Zufarbek ning portfolio botiman.
     `, { parse_mode: 'Markdown' });
   });
 
-  bot.onText(/\/messages/, (msg) => {
+  bot.onText(/\/messages/, async (msg) => {
   const chatId = msg.chat.id;
-  
-  if (messages.length === 0) {
-    bot.sendMessage(chatId, '📭 Hozircha xabarlar yo\'q.');
-    return;
+  try {
+    const recent = await db.getRecentMessages(10);
+    if (recent.length === 0) {
+      await bot.sendMessage(chatId, '📭 Hozircha xabarlar yo\'q.');
+      return;
+    }
+    let messageText = '📨 *Kelgan xabarlar:*\n\n';
+    recent.forEach(message => {
+      messageText += `🆔 *ID:* ${message.id}\n`;
+      messageText += `👤 *Ism:* ${message.name}\n`;
+      messageText += `📧 *Email:* ${message.email}\n`;
+      messageText += `💬 *Xabar:* ${message.message}\n`;
+      messageText += `⏰ *Vaqt:* ${message.timestamp}\n`;
+      messageText += `${message.replied ? '✅ Javob berilgan' : '⏳ Javob kutilmoqda'}\n`;
+      messageText += '─────────────────\n\n';
+    });
+    await bot.sendMessage(chatId, messageText, { parse_mode: 'Markdown' });
+  } catch (err) {
+    console.error('Bot /messages error:', err);
+    await bot.sendMessage(chatId, '⚠️ Xabarlarni olishda xatolik yuz berdi.');
   }
+});
 
-  let messageText = '📨 *Kelgan xabarlar:*\n\n';
-  messages.slice(-10).forEach(message => {
-    messageText += `🆔 *ID:* ${message.id}\n`;
-    messageText += `👤 *Ism:* ${message.name}\n`;
-    messageText += `📧 *Email:* ${message.email}\n`;
-    messageText += `💬 *Xabar:* ${message.message}\n`;
-    messageText += `⏰ *Vaqt:* ${message.timestamp}\n`;
-    messageText += `${message.replied ? '✅ Javob berilgan' : '⏳ Javob kutilmoqda'}\n`;
-    messageText += '─────────────────\n\n';
-  });
-
-    bot.sendMessage(chatId, messageText, { parse_mode: 'Markdown' });
-  });
-
-  bot.onText(/\/reply (\d+) (.+)/, (msg, match) => {
+  bot.onText(/\/reply (\d+) (.+)/, async (msg, match) => {
     const chatId = msg.chat.id;
     const messageIdToReply = parseInt(match[1]);
     const replyText = match[2];
-
-    const message = messages.find(m => m.id === messageIdToReply);
-
-    if (!message) {
-      bot.sendMessage(chatId, `❌ ${messageIdToReply} ID li xabar topilmadi.`);
-      return;
-    }
-
-    if (message.replied) {
-      bot.sendMessage(chatId, `⚠️ Bu xabarga allaqachon javob berilgan.`);
-      return;
-    }
-
-    // Mark as replied
-    message.replied = true;
-    message.replyText = replyText;
-    message.replyTime = new Date().toLocaleString('uz-UZ');
-
-    bot.sendMessage(chatId, `
+    try {
+      const message = await db.getMessageById(messageIdToReply);
+      if (!message) {
+        await bot.sendMessage(chatId, `❌ ${messageIdToReply} ID li xabar topilmadi.`);
+        return;
+      }
+      if (message.replied) {
+        await bot.sendMessage(chatId, `⚠️ Bu xabarga allaqachon javob berilgan.`);
+        return;
+      }
+      // Update DB
+      await db.markReplied(messageIdToReply, replyText);
+      // Send confirmation
+      await bot.sendMessage(chatId, `
 ✅ *Javob yuborildi!*
 
 🆔 *Xabar ID:* ${messageIdToReply}
@@ -124,7 +145,11 @@ Salom! Men Zufarbek ning portfolio botiman.
 💬 *Javob:* ${replyText}
 
 📧 Javob email orqali yuboriladi.
-    `, { parse_mode: 'Markdown' });
+      `, { parse_mode: 'Markdown' });
+    } catch (err) {
+      console.error('Bot /reply error:', err);
+      await bot.sendMessage(chatId, '⚠️ Javob yuborishda xatolik yuz berdi.');
+    }
   });
 }
 
@@ -142,67 +167,49 @@ app.get('/', (req, res) => {
 });
 
 // Contact form endpoint
-app.post('/api/contact', async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ 
-        success: false, 
-        error: 'Barcha maydonlar to\'ldirilishi shart' 
-      });
+app.post('/api/contact',
+  [
+    body('name').trim().isLength({ min: 1 }).withMessage('Name required'),
+    body('email').isEmail().withMessage('Valid email required'),
+    body('message').trim().isLength({ min: 1 }).withMessage('Message required')
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, error: errors.array()[0].msg });
     }
-
-    // Create message object
-    const newMessage = {
-      id: messageId++,
-      name,
-      email,
-      message,
-      timestamp: new Date().toLocaleString('uz-UZ'),
-      replied: false
-    };
-
-    messages.push(newMessage);
-
-    // Send to Telegram (faqat bot mavjud bo'lsa)
-    if (bot) {
-      const telegramMessage = `
-🔔 *Yangi xabar keldi!*
-
-🆔 *ID:* ${newMessage.id}
-👤 *Ism:* ${name}
-📧 *Email:* ${email}
-💬 *Xabar:* ${message}
-⏰ *Vaqt:* ${newMessage.timestamp}
-
-📝 *Javob berish uchun:*
-\`/reply ${newMessage.id} [sizning javobingiz]\`
-      `;
-
-      await bot.sendMessage(CHAT_ID, telegramMessage, { parse_mode: 'Markdown' });
+    try {
+      const { name, email, message } = req.body;
+      // Create message object (no manual id)
+      const newMessage = {
+        name,
+        email,
+        message,
+        timestamp: new Date().toLocaleString('uz-UZ'),
+        replied: false
+      };
+      const insertedId = await db.addMessage(newMessage);
+      newMessage.id = insertedId;
+      // Send to Telegram (faqat bot mavjud bo'lsa)
+      if (bot) {
+        const telegramMessage = `
+🔔 *Yangi xabar keldi!*\n\n🆔 *ID:* ${newMessage.id}\n👤 *Ism:* ${name}\n📧 *Email:* ${email}\n💬 *Xabar:* ${message}\n⏰ *Vaqt:* ${newMessage.timestamp}\n\n📝 *Javob berish uchun:*\n\`/reply ${newMessage.id} [sizning javobingiz]\`\n        `;
+        await bot.sendMessage(CHAT_ID, telegramMessage, { parse_mode: 'Markdown' });
+      }
+      res.json({ success: true, message: 'Xabar muvaffaqiyatli yuborildi!', messageId: newMessage.id });
+    } catch (error) {
+      console.error('Contact form error:', error);
+      res.status(500).json({ success: false, error: 'Server xatosi yuz berdi' });
     }
-
-    res.json({ 
-      success: true, 
-      message: 'Xabar muvaffaqiyatli yuborildi!',
-      messageId: newMessage.id
-    });
-
-  } catch (error) {
-    console.error('Contact form error:', error);
-    res.status(500).json({ 
-      success: false, 
-      error: 'Server xatosi yuz berdi' 
-    });
   }
-});
+);
 
 // Get all messages
 app.get('/api/messages', (req, res) => {
-  res.json({ 
-    success: true, 
-    messages: messages.slice(-50) // Last 50 messages
+  const recent = db.getRecentMessages(50);
+  res.json({
+    success: true,
+    messages: recent
   });
 });
 
@@ -210,31 +217,16 @@ app.get('/api/messages', (req, res) => {
 app.post('/api/reply', async (req, res) => {
   try {
     const { messageId, replyText } = req.body;
-
-    const message = messages.find(m => m.id === parseInt(messageId));
-    
-    if (!message) {
-      return res.status(404).json({ 
-        success: false, 
-        error: 'Xabar topilmadi' 
-      });
+    const id = parseInt(messageId);
+    const existing = await db.getMessageById(id);
+    if (!existing) {
+      return res.status(404).json({ success: false, error: 'Xabar topilmadi' });
     }
-
-    message.replied = true;
-    message.replyText = replyText;
-    message.replyTime = new Date().toLocaleString('uz-UZ');
-
-    res.json({ 
-      success: true, 
-      message: 'Javob muvaffaqiyatli yuborildi' 
-    });
-
+    await db.markReplied(id, replyText);
+    res.json({ success: true, message: 'Javob muvaffaqiyatli yuborildi' });
   } catch (error) {
     console.error('Reply error:', error);
-    res.status(500).json({ 
-      success: false, 
-      error: 'Server xatosi yuz berdi' 
-    });
+    res.status(500).json({ success: false, error: 'Server xatosi yuz berdi' });
   }
 });
 
@@ -251,10 +243,15 @@ app.use((err, req, res, next) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'build')));
 
-  app.get('*', (req, res) => {
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
   });
 }
+
+// Health check endpoint for load balancer
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 const PORT = process.env.PORT || 5000;
 
