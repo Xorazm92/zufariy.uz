@@ -1,10 +1,12 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const TelegramBot = require('node-telegram-bot-api');
+const http = require('http');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const server = http.createServer(app);
 
 // Middleware
 app.use(cors());
@@ -245,10 +247,21 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '..', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 5000;
+
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`🚀 Server ${PORT} portda ishlamoqda`);
-  console.log(`🤖 Telegram bot faol`);
+  console.log(`🤖 Telegram bot ${bot ? 'faol' : 'faol emas'}`);
   console.log(`📧 Contact API: http://localhost:${PORT}/api/contact`);
 });
 
