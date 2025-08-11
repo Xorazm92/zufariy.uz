@@ -5,15 +5,12 @@ const TelegramBot = require('node-telegram-bot-api');
 const http = require('http');
 require('dotenv').config();
 
-// Security & utilities
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const pino = require('pino');
-const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
-const { body, validationResult } = require('express-validator');
-
-// DB helper
-const db = require('./db');
+// Simple logging
+const logger = {
+  info: console.log,
+  error: console.error,
+  warn: console.warn
+};
 
 const app = express();
 const server = http.createServer(app);
