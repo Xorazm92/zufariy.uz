@@ -4,6 +4,12 @@ import "./styles.css";
 
 const socialLinks = [
   {
+    href: "mailto:zufar.bobojonov.dev@gmail.com",
+    icon: "far fa-envelope",
+    label: "Email",
+    color: "#ea4335"
+  },
+  {
     href: "https://www.linkedin.com/in/zufar-bobojonov-6544a6251/",
     icon: "fab fa-linkedin",
     label: "LinkedIn",
@@ -16,22 +22,16 @@ const socialLinks = [
     color: "#333"
   },
   {
-    href: "https://drive.google.com/file/d/1gsuX95WSjSeZ3Xdq9cBzT_2Lfzr6P-G_/view?usp=sharing",
-    icon: "far fa-file-alt",
-    label: "Resume",
-    color: "#ea4335"
-  },
-  {
-    href: "https://devpost.com/rayadunia2021?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav",
-    icon: "fas fa-code",
-    label: "DevPost",
-    color: "#003e54"
-  },
-  {
     href: "https://t.me/Zufar_Xorazmiy",
     icon: "fab fa-telegram-plane",
     label: "Telegram",
     color: "#0088cc"
+  },
+  {
+    href: "https://drive.google.com/file/d/1gsuX95WSjSeZ3Xdq9cBzT_2Lfzr6P-G_/view?usp=sharing",
+    icon: "far fa-file-alt",
+    label: "Resume",
+    color: "#4285f4"
   }
 ];
 

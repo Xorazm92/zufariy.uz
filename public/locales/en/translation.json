@@ -8,9 +8,17 @@
   },
   "language": "Language",
   "intro": {
-    "greeting": "Hello, my name is Zufarbek Bobojonov Karimberganovich.",
-    "role": "I am a Full Stack (NodeJS+ReactJS) developer.",
-    "welcome": "Welcome to my website!"
+    "greeting": "Hello, my name is Zufarbek Bobojonov.",
+    "role": "I am a Full Stack Developer & Software Engineer.",
+    "welcome": "Welcome to my portfolio website!",
+    "description": "I love working with modern web technologies and am always ready to learn new things. My goal is to create user-friendly and efficient software solutions.",
+    "contact": "Contact",
+    "projects": "Projects",
+    "quickInfo": "Quick Info",
+    "focus": "Focus",
+    "location": "Location",
+    "experience": "Experience",
+    "status": "Status"
   },
   "projects": {
     "title": "My Projects",

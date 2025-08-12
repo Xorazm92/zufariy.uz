@@ -16,15 +16,9 @@ const app = express();
 const server = http.createServer(app);
 
 // Middleware
-app.use(helmet());
 app.use(cors({ origin: process.env.NODE_ENV === 'production' ? 'https://zufariy.uz' : '*' }));
 app.use(express.json());
-// Rate limiting: 100 requests per IP per hour
-app.use(rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 100,
-  message: { success: false, error: 'Too many requests, please try again later.' }
-}));
+
 // Request logging
 app.use((req, res, next) => {
   logger.info({ method: req.method, url: req.url, ip: req.ip }, 'Incoming request');

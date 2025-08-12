@@ -4,21 +4,16 @@
   "private": true,
   "homepage": "https://zufariy.uz",
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.15",
-    "@mui/material": "^5.15.15",
-    "@react-three/drei": "^9.106.2",
-    "@react-three/fiber": "^8.16.3",
-    "@react-three/postprocessing": "^2.16.1",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.1",
+    "@mui/material": "^7.3.1",
+    "ajv": "^8.17.1",
     "axios": "^1.11.0",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.7",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "express-rate-limit": "^7.2.0",
     "express-validator": "^7.0.1",
     "framer-motion": "^11.18.2",
@@ -26,37 +21,28 @@
     "i18next": "^25.2.1",
     "i18next-http-backend": "^3.0.2",
     "node-telegram-bot-api": "^0.66.0",
-    "pino": "^9.0.0",
     "react": "^18.3.1",
-    "react-bootstrap": "^2.10.2",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-i18next": "^15.5.3",
     "react-icons": "^5.5.0",
     "react-router-dom": "^6.22.3",
-    "react-scripts": "^5.0.1",
-    "react-scroll": "^1.9.0",
+    "react-scroll": "^1.9.3",
     "react-type-animation": "^3.2.0",
-    "react-vertical-timeline-component": "^3.6.0",
-    "serve": "^14.2.1",
-    "sqlite3": "^5.1.6",
-    "web-vitals": "^2.1.4"
+    "react-vertical-timeline-component": "^3.5.3",
+    "serve": "^10.0.2",
+    "sqlite3": "^5.1.6"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_OPTIONS='--max-old-space-size=4096' react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "server": "node server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm start\"",
-    "prod-deploy": "./production-deploy.sh",
-    "quick-deploy": "./quick-deploy.sh",
-    "webhook": "node webhook-deploy.js"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "build": "NODE_OPTIONS='--max-old-space-size=2048' GENERATE_SOURCEMAP=false react-scripts build",
+    "build:analyze": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js",
+    "server": "node server/minimal-server.js",
+    "server:full": "node server/index.js",
+    "dev": "npm run server & npm start",
+    "prod": "npm run build && npm run server",
+    "deploy": "npm run build && pm2 restart ecosystem.config.js --env production"
   },
   "browserslist": {
     "production": [
@@ -70,12 +56,13 @@
       "last 1 safari version"
     ]
   },
-  "overrides": {
-    "typescript": "4.9.5"
-  },
   "devDependencies": {
-    "concurrently": "^9.2.0",
-    "gh-pages": "^6.1.1",
-    "pm2": "^5.4.0"
+    "pm2": "^5.4.0",
+    "react-scripts": "^5.0.1",
+    "webpack-bundle-analyzer": "^4.9.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   }
 }

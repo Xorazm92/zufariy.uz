@@ -8,9 +8,17 @@
   },
   "language": "Til",
   "intro": {
-    "greeting": "Salom, mening ismim Zufarbek Bobojonov Karimberganovich.",
-    "role": "Men Full Stack (NodeJS+ReactJS) dasturchiman.",
-    "welcome": "Mening veb-saytimga xush kelibsiz!"
+    "greeting": "Salom, mening ismim Zufarbek Bobojonov.",
+    "role": "Men Full Stack Developer va Software Engineer man.",
+    "welcome": "Mening portfolio saytimga xush kelibsiz!",
+    "description": "Men zamonaviy web texnologiyalar bilan ishlashni yaxshi ko'raman va har doim yangi narsalarni o'rganishga tayyor. Mening maqsadim - foydalanuvchilar uchun qulay va samarali dasturiy ta'minot yaratish.",
+    "contact": "Bog'lanish",
+    "projects": "Loyihalar",
+    "quickInfo": "Tezkor Ma'lumot",
+    "focus": "Yo'nalish",
+    "location": "Joylashuv",
+    "experience": "Tajriba",
+    "status": "Holat"
   },
   "projects": {
     "title": "Mening Loyihalarim",

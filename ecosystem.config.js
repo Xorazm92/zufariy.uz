@@ -2,11 +2,14 @@ module.exports = {
   apps: [
     {
       name: 'zufariy-server',
-      script: 'server/index.js',
-      instances: 1,
+      script: 'server/minimal-server.js',
+      instances: 'max', // Use all CPU cores
+      exec_mode: 'cluster',
       autorestart: true,
       watch: false,
-      max_memory_restart: '1G',
+      max_memory_restart: '512M', // Reduced memory limit
+      min_uptime: '10s',
+      max_restarts: 10,
       env: {
         NODE_ENV: 'development',
         PORT: 5000
@@ -18,7 +21,10 @@ module.exports = {
       error_file: './logs/err.log',
       out_file: './logs/out.log',
       log_file: './logs/combined.log',
-      time: true
+      time: true,
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+      merge_logs: true,
+      kill_timeout: 5000
     },
     {
       name: 'webhook-server',
@@ -41,7 +47,7 @@ module.exports = {
       repo: 'https://github.com/Xorazm92/zufariy.uz.git',
       path: '/var/www/zufariy.uz',
       'pre-deploy-local': '',
-      'post-deploy': 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
+      'post-deploy': 'npm ci --only=production && npm run build && pm2 reload ecosystem.config.js --env production',
       'pre-setup': ''
     }
   }

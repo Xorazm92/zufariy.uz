@@ -143,18 +143,18 @@ const Contact = () => {
                   <FiMail size={20} />
                   <div>
                     <div className="fw-semibold">Email</div>
-                    <div className="label">hello@zufariy.uz</div>
+                    <div className="label">zufar.bobojonov.dev@gmail.com</div>
                   </div>
                 </div>
                 <div className="right">
-                  <Button size="sm" variant="outline-primary" href="mailto:hello@zufariy.uz">
+                  <Button size="sm" variant="outline-primary" href="mailto:zufar.bobojonov.dev@gmail.com">
                     <FiSend className="me-1" /> {t('contact.form.send')}
                   </Button>
                   <Button
                     size="sm"
                     variant={copiedEmail ? 'success' : 'outline-secondary'}
                     onClick={async () => {
-                      await navigator.clipboard.writeText('hello@zufariy.uz');
+                      await navigator.clipboard.writeText('zufar.bobojonov.dev@gmail.com');
                       setCopiedEmail(true);
                       setTimeout(() => setCopiedEmail(false), 1500);
                     }}
