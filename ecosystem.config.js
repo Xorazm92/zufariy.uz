@@ -3,11 +3,11 @@ module.exports = {
     {
       name: 'zufariy-server',
       script: 'server/minimal-server.js',
-      instances: 'max', // Use all CPU cores
+      instances: 'max', // PM2 will convert string 'max' to use all cores, but you can use max without quotes in newer PM2
       exec_mode: 'cluster',
       autorestart: true,
       watch: false,
-      max_memory_restart: '512M', // Reduced memory limit
+      max_memory_restart: '512M',
       min_uptime: '10s',
       max_restarts: 10,
       env: {
@@ -18,8 +18,6 @@ module.exports = {
         NODE_ENV: 'production',
         PORT: 5000
       },
-      error_file: './logs/err.log',
-      out_file: './logs/out.log',
       log_file: './logs/combined.log',
       time: true,
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
@@ -42,12 +40,12 @@ module.exports = {
   deploy: {
     production: {
       user: 'ubuntu',
-      host: 'your-server-ip',
+      host: 'your-server-ip', // <--- CHANGE THIS TO YOUR ACTUAL SERVER IP OR HOSTNAME
       ref: 'origin/main',
       repo: 'https://github.com/Xorazm92/zufariy.uz.git',
       path: '/var/www/zufariy.uz',
       'pre-deploy-local': '',
-      'post-deploy': 'npm ci --only=production && npm run build && pm2 reload ecosystem.config.js --env production',
+      'post-deploy': 'npm ci --omit=dev && npm run build && pm2 reload ecosystem.config.js --env production',
       'pre-setup': ''
     }
   }
