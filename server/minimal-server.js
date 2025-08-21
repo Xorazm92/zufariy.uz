@@ -55,7 +55,22 @@ const CHAT_ID = process.env.CHAT_ID;
 if (BOT_TOKEN && BOT_TOKEN !== 'your_telegram_bot_token_here') {
   try {
     const TelegramBot = require('node-telegram-bot-api');
-    bot = new TelegramBot(BOT_TOKEN, { polling: true });
+    bot = new TelegramBot(BOT_TOKEN, { 
+      polling: true,
+      polling_options: {
+        timeout: 10,
+        limit: 100,
+        retryTimeout: 5000
+      }
+    });
+    
+    // Polling error-larni suppress qilish
+    bot.on('polling_error', (error) => {
+      if (error.code !== 'ETELEGRAM' && error.code !== 'ECONNRESET') {
+        console.log('⚠️ Telegram polling error:', error.message);
+      }
+    });
+    
     console.log('✅ Telegram bot connected');
   } catch (error) {
     console.log('⚠️ Telegram bot error:', error.message);

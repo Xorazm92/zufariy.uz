@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import "./projects.css";
-import { Modal, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 
 // Loyiha rasmlari
@@ -10,6 +9,9 @@ const imageMap = {
   datagaze: require("../res/projects/datagaze.png"),
   crm: require("../res/projects/crm.png"),
   nasiya: require("../res/projects/nasiya.png"),
+  inbola: require("../res/projects/inbola.uz.png"),
+  uztrain: require("../res/projects/uztrain.png"),
+  "101labs": require("../res/projects/101labs.png"),
   quiz_app: require("../res/projects/quiz-app.png"),
   ngk_bot: require("../res/projects/ngk-bot.png"),
   quiz_bot: require("../res/projects/quiz-bot.png"),
@@ -52,10 +54,6 @@ function Card3D({ children }) {
 const Projects = ({ id }) => {
   const { t } = useTranslation();
   const projectsList = t('projects.list', { returnObjects: true });
-  const [show, setShow] = useState(false);
-  const [active, setActive] = useState(null);
-  const openDetails = (p) => { setActive(p); setShow(true); };
-  const closeDetails = () => setShow(false);
 
   return (
     <>
@@ -79,15 +77,12 @@ const Projects = ({ id }) => {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-outline-dark btn-sm"
+                      className="btn btn-primary btn-sm"
                       role="button"
                     >
                       {project.buttonText}
                     </a>
                   )}
-                  <Button size="sm" variant="primary" onClick={() => openDetails(project)}>
-                    {t('projects.details') || 'Details'}
-                  </Button>
                 </div>
               </div>
             </Card3D>
@@ -95,34 +90,6 @@ const Projects = ({ id }) => {
         ))}
       </div>
       </div>
-
-      <Modal show={show} onHide={closeDetails} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{active?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {active && (
-            <>
-              <img src={imageMap[active.id]} alt={active.alt} className="img-fluid rounded mb-3" />
-              <p className="mb-2">{active.description}</p>
-              {active.tech && <p className="text-muted"><strong>Tech:</strong> {active.tech}</p>}
-            </>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          {active?.link && (
-            <a href={active.link} target="_blank" rel="noopener noreferrer" className="btn btn-dark">
-              {active.buttonText}
-            </a>
-          )}
-          {active?.repo && (
-            <a href={active.repo} target="_blank" rel="noopener noreferrer" className="btn btn-outline-secondary">
-              GitHub
-            </a>
-          )}
-          <Button variant="secondary" onClick={closeDetails}>Close</Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 };

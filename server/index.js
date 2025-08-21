@@ -39,7 +39,24 @@ if (process.env.NODE_ENV !== 'production') {
 let bot = null;
 if (BOT_TOKEN && BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE' && BOT_TOKEN.trim() !== '') {
   try {
-    bot = new TelegramBot(BOT_TOKEN, { polling: true });
+    bot = new TelegramBot(BOT_TOKEN, { 
+      polling: true,
+      // Polling error-larni suppress qilish
+      polling_options: {
+        timeout: 10,
+        limit: 100,
+        retryTimeout: 5000
+      }
+    });
+    
+    // Polling error-larni handle qilish
+    bot.on('polling_error', (error) => {
+      // Faqat critical error-larni log qilish
+      if (error.code !== 'ETELEGRAM' && error.code !== 'ECONNRESET') {
+        console.log('⚠️ Telegram polling error:', error.message);
+      }
+    });
+    
     console.log('🤖 Telegram bot faol');
   } catch (error) {
     console.log('⚠️ Bot token noto\'g\'ri:', error.message);

@@ -42,6 +42,36 @@ const iconMap = {
   '1c buxgalteriya': { src: icon1C, type: 'image' },
 };
 
+// Rasmiy dokumentatsiya URL'lari
+const docUrls = {
+  typescript: 'https://www.typescriptlang.org/docs/',
+  nestjs: 'https://docs.nestjs.com/',
+  expressjs: 'https://expressjs.com/en/guide/routing.html',
+  react: 'https://react.dev/learn',
+  postgresql: 'https://www.postgresql.org/docs/',
+  mongodb: 'https://www.mongodb.com/docs/',
+  redis: 'https://redis.io/docs/',
+  prisma: 'https://www.prisma.io/docs',
+  typeorm: 'https://typeorm.io/',
+  sequelize: 'https://sequelize.org/docs/',
+  rest: 'https://restfulapi.net/',
+  graphql: 'https://graphql.org/learn/',
+  grpc: 'https://grpc.io/docs/',
+  swagger: 'https://swagger.io/specification/',
+  docker: 'https://docs.docker.com/',
+  'github actions': 'https://docs.github.com/actions',
+  aws: 'https://docs.aws.amazon.com/',
+  gcp: 'https://cloud.google.com/docs',
+  digitalocean: 'https://docs.digitalocean.com/',
+  microservices: 'https://microservices.io/',
+  rabbitmq: 'https://www.rabbitmq.com/documentation.html',
+  oop: 'https://en.wikipedia.org/wiki/Object-oriented_programming',
+  appsheet: 'https://support.google.com/appsheet#topic=10106675',
+  excel: 'https://support.microsoft.com/excel',
+  word: 'https://support.microsoft.com/word',
+  '1c buxgalteriya': 'https://its.1c.ru/',
+};
+
 const SkillIcon = ({ name }) => {
   const skillKey = name.toLowerCase();
   const IconData = iconMap[skillKey];
@@ -57,15 +87,38 @@ const SkillIcon = ({ name }) => {
   }
 
   const { type, src, icon: IconComponent, color } = IconData;
+  const href = docUrls[skillKey];
 
-  return (
-    <div className="skill-icon-container">
+  const content = (
+    <>
       {type === 'image' ? (
         <img src={src} alt={`${name} icon`} className="skill-image-icon" />
       ) : (
         <IconComponent style={{ color: color || '#6c757d' }} size="3em" />
       )}
       <p>{name}</p>
+    </>
+  );
+
+  // Agar hujjat URL'i mavjud bo'lsa, link sifatida qaytaramiz
+  if (href) {
+    return (
+      <a
+        className="skill-icon-container"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${name} dokumentatsiyasi`}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  // Aks holda oddiy container
+  return (
+    <div className="skill-icon-container">
+      {content}
     </div>
   );
 };
